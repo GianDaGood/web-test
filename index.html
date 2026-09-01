@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Course Website</title>
+    <title>Programming 1</title>
 
     <style>
         * {
@@ -19,7 +19,7 @@
         }
 
         header {
-            padding: 25px;
+            padding: 25px 20px;
             text-align: center;
             background: #111827;
             border-bottom: 1px solid #334155;
@@ -35,24 +35,26 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 950px;
             margin: auto;
             padding: 30px 20px;
         }
 
+        /* HOME */
+
         .welcome {
             text-align: center;
-            padding: 40px 20px;
+            padding: 45px 20px;
         }
 
         .welcome h2 {
-            font-size: 36px;
+            font-size: 38px;
             margin-bottom: 15px;
         }
 
         .welcome p {
             color: #cbd5e1;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
         }
 
         .topics {
@@ -69,6 +71,7 @@
             text-decoration: none;
             color: white;
             transition: 0.2s;
+            cursor: pointer;
         }
 
         .topic:hover {
@@ -85,10 +88,114 @@
             font-size: 14px;
         }
 
+        /* LESSON */
+
+        .lesson {
+            display: none;
+            background: #111827;
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        .lesson.active {
+            display: block;
+        }
+
+        .lesson-number {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .lesson h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .lesson h3 {
+            margin-top: 30px;
+            margin-bottom: 12px;
+        }
+
+        .lesson p {
+            color: #cbd5e1;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .lesson ul {
+            margin-left: 25px;
+            color: #cbd5e1;
+            line-height: 1.8;
+        }
+
+        pre {
+            background: #020617;
+            border: 1px solid #334155;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        code {
+            font-family: Consolas, monospace;
+            color: #e2e8f0;
+        }
+
+        .explanation {
+            background: #1e293b;
+            border-left: 4px solid #64748b;
+            padding: 18px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 35px;
+        }
+
+        .button {
+            border: none;
+            background: #334155;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background: #475569;
+        }
+
         footer {
             text-align: center;
             padding: 30px;
             color: #64748b;
+        }
+
+        @media (max-width: 600px) {
+            .welcome h2 {
+                font-size: 30px;
+            }
+
+            .lesson {
+                padding: 22px;
+            }
+
+            .lesson h2 {
+                font-size: 26px;
+            }
+
+            .navigation {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -102,52 +209,284 @@
 
 <div class="container">
 
-    <section class="welcome">
-        <h2>Welcome! 👋</h2>
+    <!-- ================= HOME ================= -->
+
+    <section id="home">
+
+        <section class="welcome">
+            <h2>Welcome! 👋</h2>
+
+            <p>
+                Learn programming through lessons, examples, and activities.
+            </p>
+
+            <p>
+                Choose a topic below to start learning.
+            </p>
+        </section>
+
+        <section class="topics">
+
+            <a class="topic" onclick="openLesson('topic05')">
+                <h3>📚 Topic 05</h3>
+                <p>Python String Formatting</p>
+            </a>
+
+            <a class="topic" onclick="openLesson('topic06')">
+                <h3>📝 Topic 06</h3>
+                <p>String Access & Slicing</p>
+            </a>
+
+            <a class="topic" onclick="openLesson('topic07')">
+                <h3>🔢 Topic 07</h3>
+                <p>Arithmetic Operators</p>
+            </a>
+
+            <a class="topic" onclick="openLesson('topic08')">
+                <h3>➗ Topic 08</h3>
+                <p>Assignment Operators</p>
+            </a>
+
+            <a class="topic" onclick="openLesson('topic09')">
+                <h3>⚖️ Topic 09</h3>
+                <p>Conditional Operators</p>
+            </a>
+
+            <a class="topic" onclick="openLesson('topic10')">
+                <h3>🧠 Topic 10</h3>
+                <p>Logical Operators</p>
+            </a>
+
+        </section>
+
+    </section>
+
+
+    <!-- ================= TOPIC 05 ================= -->
+
+    <section id="topic05" class="lesson">
+
+        <div class="lesson-number">TOPIC 05</div>
+
+        <h2>Python String Formatting</h2>
+
         <p>
-            Learn programming through lessons, examples, and activities.
+            String formatting allows us to combine text with variables
+            and values to create useful messages.
         </p>
+
+        <h3>🎯 What will you learn?</h3>
+
+        <ul>
+            <li>What string formatting means</li>
+            <li>How to use f-strings</li>
+            <li>How to insert variables into text</li>
+            <li>How to create formatted output</li>
+        </ul>
+
+        <h3>💻 Example</h3>
+
+        <pre><code>name = "Gian"
+age = 20
+
+print(f"My name is {name}.")
+print(f"I am {age} years old.")</code></pre>
+
+        <h3>🔍 Explanation</h3>
+
+        <div class="explanation">
+
+            <p>
+                <strong>name = "Gian"</strong><br>
+                We create a variable named <strong>name</strong>
+                and store the text "Gian" inside it.
+            </p>
+
+            <p>
+                <strong>age = 20</strong><br>
+                We create an <strong>age</strong> variable and store
+                the number 20.
+            </p>
+
+            <p>
+                The letter <strong>f</strong> before the quotation marks
+                allows us to insert variables inside
+                <strong>{ }</strong>.
+            </p>
+
+        </div>
+
+        <h3>📌 Output</h3>
+
+        <pre><code>My name is Gian.
+I am 20 years old.</code></pre>
+
+        <div class="navigation">
+            <button class="button" onclick="showHome()">
+                ← Back to Topics
+            </button>
+
+            <button class="button" onclick="openLesson('topic06')">
+                Next Topic →
+            </button>
+        </div>
+
     </section>
 
-    <section class="topics">
 
-        <a class="topic" href="#">
-            <h3>📘 Topic 01</h3>
-            <p>Introduction to Programming</p>
-        </a>
+    <!-- ================= TOPIC 06 ================= -->
 
-        <a class="topic" href="#">
-            <h3>💻 Topic 02</h3>
-            <p>Python Basics</p>
-        </a>
+    <section id="topic06" class="lesson">
 
-        <a class="topic" href="#">
-            <h3>🔢 Topic 03</h3>
-            <p>Variables and Data Types</p>
-        </a>
+        <div class="lesson-number">TOPIC 06</div>
 
-        <a class="topic" href="#">
-            <h3>🔄 Topic 04</h3>
-            <p>Conditional Statements</p>
-        </a>
+        <h2>String Access & Slicing</h2>
 
-        <a class="topic" href="#">
-            <h3>📚 Topic 05</h3>
-            <p>Loops</p>
-        </a>
+        <p>
+            Strings are made up of individual characters.
+            Python allows us to access specific characters using indexes.
+        </p>
 
-        <a class="topic" href="#">
-            <h3>📝 Topic 06</h3>
-            <p>Practice Activities</p>
-        </a>
+        <h3>💻 Example</h3>
+
+        <pre><code>word = "PYTHON"
+
+print(word[0])
+print(word[1])
+print(word[-1])</code></pre>
+
+        <h3>🔍 Explanation</h3>
+
+        <div class="explanation">
+
+            <p>
+                Python starts counting indexes at <strong>0</strong>.
+            </p>
+
+            <p>
+                P = index 0<br>
+                Y = index 1<br>
+                T = index 2
+            </p>
+
+            <p>
+                Using <strong>-1</strong> means the last character.
+            </p>
+
+        </div>
+
+        <h3>✂️ Slicing</h3>
+
+        <pre><code>word = "PYTHON"
+
+print(word[0:2])</code></pre>
+
+        <p>
+            The result is <strong>PY</strong>.
+            The starting index is included, but the ending index is not.
+        </p>
+
+        <div class="navigation">
+
+            <button class="button" onclick="openLesson('topic05')">
+                ← Previous
+            </button>
+
+            <button class="button" onclick="openLesson('topic07')">
+                Next Topic →
+            </button>
+
+        </div>
 
     </section>
 
-</div>
 
-<footer>
-    <p>© 2026 My Course Website</p>
-</footer>
+    <!-- ================= TOPIC 07 ================= -->
 
-</body>
-</html>
+    <section id="topic07" class="lesson">
+
+        <div class="lesson-number">TOPIC 07</div>
+
+        <h2>Arithmetic Operators</h2>
+
+        <p>
+            Arithmetic operators are used to perform mathematical
+            calculations in Python.
+        </p>
+
+        <h3>📚 Operators</h3>
+
+        <pre><code>+   Addition
+-   Subtraction
+*   Multiplication
+/   Division
+//  Floor Division
+%   Remainder
+**  Exponent</code></pre>
+
+        <h3>💻 Example</h3>
+
+        <pre><code>a = 10
+b = 3
+
+print(a + b)
+print(a - b)
+print(a * b)
+print(a / b)
+print(a % b)</code></pre>
+
+        <h3>🔍 Explanation</h3>
+
+        <div class="explanation">
+
+            <p>
+                <strong>+</strong> adds two numbers.
+            </p>
+
+            <p>
+                <strong>-</strong> subtracts numbers.
+            </p>
+
+            <p>
+                <strong>*</strong> multiplies numbers.
+            </p>
+
+            <p>
+                <strong>/</strong> performs division.
+            </p>
+
+            <p>
+                <strong>%</strong> gives the remainder.
+            </p>
+
+        </div>
+
+        <div class="navigation">
+
+            <button class="button" onclick="openLesson('topic06')">
+                ← Previous
+            </button>
+
+            <button class="button" onclick="openLesson('topic08')">
+                Next Topic →
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= TOPIC 08 ================= -->
+
+    <section id="topic08" class="lesson">
+
+        <div class="lesson-number">TOPIC 08</div>
+
+        <h2>Assignment Operators</h2>
+
+        <p>
+            Assignment operators are used to store and update
+            values inside variables.
+        </p>
+
+        <h3>💻 Basic Assignment
