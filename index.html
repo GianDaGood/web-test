@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Programming 1</title>
 
     <style>
@@ -40,8 +41,6 @@
             padding: 30px 20px;
         }
 
-        /* HOME */
-
         .welcome {
             text-align: center;
             padding: 45px 20px;
@@ -64,14 +63,15 @@
         }
 
         .topic {
+            display: block;
             background: #1e293b;
             border: 1px solid #334155;
             border-radius: 12px;
             padding: 25px;
             text-decoration: none;
             color: white;
-            transition: 0.2s;
             cursor: pointer;
+            transition: 0.2s;
         }
 
         .topic:hover {
@@ -97,10 +97,6 @@
             border-radius: 16px;
             padding: 30px;
             margin-top: 20px;
-        }
-
-        .lesson.active {
-            display: block;
         }
 
         .lesson-number {
@@ -167,7 +163,7 @@
             padding: 12px 18px;
             border-radius: 8px;
             cursor: pointer;
-            text-decoration: none;
+            font-size: 15px;
         }
 
         .button:hover {
@@ -196,6 +192,10 @@
             .navigation {
                 flex-direction: column;
             }
+
+            .button {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -214,6 +214,7 @@
     <section id="home">
 
         <section class="welcome">
+
             <h2>Welcome! 👋</h2>
 
             <p>
@@ -223,6 +224,7 @@
             <p>
                 Choose a topic below to start learning.
             </p>
+
         </section>
 
         <section class="topics">
@@ -242,21 +244,6 @@
                 <p>Arithmetic Operators</p>
             </a>
 
-            <a class="topic" onclick="openLesson('topic08')">
-                <h3>➗ Topic 08</h3>
-                <p>Assignment Operators</p>
-            </a>
-
-            <a class="topic" onclick="openLesson('topic09')">
-                <h3>⚖️ Topic 09</h3>
-                <p>Conditional Operators</p>
-            </a>
-
-            <a class="topic" onclick="openLesson('topic10')">
-                <h3>🧠 Topic 10</h3>
-                <p>Logical Operators</p>
-            </a>
-
         </section>
 
     </section>
@@ -266,23 +253,25 @@
 
     <section id="topic05" class="lesson">
 
-        <div class="lesson-number">TOPIC 05</div>
+        <div class="lesson-number">
+            TOPIC 05
+        </div>
 
         <h2>Python String Formatting</h2>
 
         <p>
-            String formatting allows us to combine text with variables
-            and values to create useful messages.
+            String formatting is used when we want to combine text
+            with variables or values to create a complete message.
         </p>
 
-        <h3>🎯 What will you learn?</h3>
+        <h3>🎯 What is String Formatting?</h3>
 
-        <ul>
-            <li>What string formatting means</li>
-            <li>How to use f-strings</li>
-            <li>How to insert variables into text</li>
-            <li>How to create formatted output</li>
-        </ul>
+        <p>
+            Normally, a string contains only text. But in programming,
+            we often need to display information stored inside variables.
+            String formatting allows us to put those values directly
+            inside a message.
+        </p>
 
         <h3>💻 Example</h3>
 
@@ -297,21 +286,28 @@ print(f"I am {age} years old.")</code></pre>
         <div class="explanation">
 
             <p>
-                <strong>name = "Gian"</strong><br>
-                We create a variable named <strong>name</strong>
-                and store the text "Gian" inside it.
+                <strong>name = "Gian"</strong>
+                creates a variable called <strong>name</strong>.
+                The value stored inside it is the text
+                <strong>"Gian"</strong>.
             </p>
 
             <p>
-                <strong>age = 20</strong><br>
-                We create an <strong>age</strong> variable and store
-                the number 20.
+                <strong>age = 20</strong>
+                creates another variable called
+                <strong>age</strong> and stores the number
+                <strong>20</strong>.
             </p>
 
             <p>
-                The letter <strong>f</strong> before the quotation marks
-                allows us to insert variables inside
-                <strong>{ }</strong>.
+                Notice the letter <strong>f</strong> before the quotation
+                marks. This tells Python that we are using an
+                <strong>f-string</strong>.
+            </p>
+
+            <p>
+                Anything placed inside <strong>{ }</strong> can be
+                replaced by the value of a variable.
             </p>
 
         </div>
@@ -321,7 +317,25 @@ print(f"I am {age} years old.")</code></pre>
         <pre><code>My name is Gian.
 I am 20 years old.</code></pre>
 
+        <h3>🧠 Another Example</h3>
+
+        <pre><code>product = "Laptop"
+price = 35000
+
+print(f"The {product} costs ₱{price}.")</code></pre>
+
+        <p>
+            Here, Python takes the values of
+            <strong>product</strong> and <strong>price</strong>
+            and puts them into the sentence.
+        </p>
+
+        <h3>📌 Output</h3>
+
+        <pre><code>The Laptop costs ₱35000.</code></pre>
+
         <div class="navigation">
+
             <button class="button" onclick="showHome()">
                 ← Back to Topics
             </button>
@@ -329,6 +343,7 @@ I am 20 years old.</code></pre>
             <button class="button" onclick="openLesson('topic06')">
                 Next Topic →
             </button>
+
         </div>
 
     </section>
@@ -338,53 +353,143 @@ I am 20 years old.</code></pre>
 
     <section id="topic06" class="lesson">
 
-        <div class="lesson-number">TOPIC 06</div>
+        <div class="lesson-number">
+            TOPIC 06
+        </div>
 
         <h2>String Access & Slicing</h2>
 
         <p>
-            Strings are made up of individual characters.
-            Python allows us to access specific characters using indexes.
+            A string is made up of individual characters.
+            Python allows us to access specific characters
+            by using their index.
         </p>
 
-        <h3>💻 Example</h3>
+        <h3>🔢 Understanding Indexes</h3>
+
+        <p>
+            Python starts counting characters from
+            <strong>0</strong>, not 1.
+        </p>
+
+        <pre><code>word = "PYTHON"
+
+P = 0
+Y = 1
+T = 2
+H = 3
+O = 4
+N = 5</code></pre>
+
+        <h3>💻 Accessing a Character</h3>
 
         <pre><code>word = "PYTHON"
 
 print(word[0])
 print(word[1])
-print(word[-1])</code></pre>
+print(word[2])</code></pre>
 
         <h3>🔍 Explanation</h3>
 
         <div class="explanation">
 
             <p>
-                Python starts counting indexes at <strong>0</strong>.
+                <strong>word[0]</strong> means:
+                "Give me the character at index 0."
+                The answer is <strong>P</strong>.
             </p>
 
             <p>
-                P = index 0<br>
-                Y = index 1<br>
-                T = index 2
+                <strong>word[1]</strong> gives us
+                <strong>Y</strong>.
             </p>
 
             <p>
-                Using <strong>-1</strong> means the last character.
+                <strong>word[2]</strong> gives us
+                <strong>T</strong>.
             </p>
 
         </div>
 
-        <h3>✂️ Slicing</h3>
+        <h3>📌 Output</h3>
+
+        <pre><code>P
+Y
+T</code></pre>
+
+        <h3>⬅️ Negative Indexing</h3>
+
+        <p>
+            Python also allows us to count from the end of a string.
+            We use negative numbers for this.
+        </p>
+
+        <pre><code>word = "PYTHON"
+
+print(word[-1])
+print(word[-2])</code></pre>
+
+        <div class="explanation">
+
+            <p>
+                <strong>-1</strong> means the last character.
+            </p>
+
+            <p>
+                <strong>-2</strong> means the second-to-last character.
+            </p>
+
+        </div>
+
+        <h3>📌 Output</h3>
+
+        <pre><code>N
+O</code></pre>
+
+        <h3>✂️ String Slicing</h3>
+
+        <p>
+            Slicing allows us to get a portion of a string instead
+            of getting only one character.
+        </p>
 
         <pre><code>word = "PYTHON"
 
 print(word[0:2])</code></pre>
 
         <p>
-            The result is <strong>PY</strong>.
-            The starting index is included, but the ending index is not.
+            The first number is the starting index.
+            The second number is the ending index.
+            The starting index is included, but the ending index
+            is not included.
         </p>
+
+        <h3>📌 Output</h3>
+
+        <pre><code>PY</code></pre>
+
+        <h3>💡 Remember</h3>
+
+        <div class="explanation">
+
+            <p>
+                When you see:
+                <strong>word[0:2]</strong>
+            </p>
+
+            <p>
+                Start at index <strong>0</strong> → P
+            </p>
+
+            <p>
+                Stop before index <strong>2</strong>.
+            </p>
+
+            <p>
+                Therefore, the result is <strong>PY</strong>.
+            </p>
+
+        </div>
 
         <div class="navigation">
 
@@ -405,26 +510,127 @@ print(word[0:2])</code></pre>
 
     <section id="topic07" class="lesson">
 
-        <div class="lesson-number">TOPIC 07</div>
+        <div class="lesson-number">
+            TOPIC 07
+        </div>
 
         <h2>Arithmetic Operators</h2>
 
         <p>
-            Arithmetic operators are used to perform mathematical
-            calculations in Python.
+            Arithmetic operators are symbols used in Python
+            to perform mathematical calculations.
         </p>
 
-        <h3>📚 Operators</h3>
+        <h3>📚 Main Arithmetic Operators</h3>
 
         <pre><code>+   Addition
 -   Subtraction
 *   Multiplication
 /   Division
 //  Floor Division
-%   Remainder
+%   Modulus
 **  Exponent</code></pre>
 
-        <h3>💻 Example</h3>
+        <h3>➕ Addition</h3>
+
+        <pre><code>a = 10
+b = 3
+
+print(a + b)</code></pre>
+
+        <p>
+            Python adds 10 and 3.
+        </p>
+
+        <pre><code>13</code></pre>
+
+        <h3>➖ Subtraction</h3>
+
+        <pre><code>a = 10
+b = 3
+
+print(a - b)</code></pre>
+
+        <p>
+            Python subtracts 3 from 10.
+        </p>
+
+        <pre><code>7</code></pre>
+
+        <h3>✖️ Multiplication</h3>
+
+        <pre><code>a = 10
+b = 3
+
+print(a * b)</code></pre>
+
+        <p>
+            The <strong>*</strong> operator multiplies the two values.
+        </p>
+
+        <pre><code>30</code></pre>
+
+        <h3>➗ Division</h3>
+
+        <pre><code>a = 10
+b = 3
+
+print(a / b)</code></pre>
+
+        <p>
+            The <strong>/</strong> operator performs normal division.
+        </p>
+
+        <pre><code>3.3333333333333335</code></pre>
+
+        <h3>🔢 Floor Division</h3>
+
+        <pre><code>print(10 // 3)</code></pre>
+
+        <p>
+            Floor division removes the decimal part of the result
+            by rounding down to the nearest whole number.
+        </p>
+
+        <pre><code>3</code></pre>
+
+        <h3>🟰 Modulus / Remainder</h3>
+
+        <pre><code>print(10 % 3)</code></pre>
+
+        <p>
+            The <strong>%</strong> operator gives us the remainder
+            after division.
+        </p>
+
+        <div class="explanation">
+
+            <p>
+                10 divided by 3 gives us 3 with a remainder of 1.
+            </p>
+
+            <p>
+                Therefore:
+            </p>
+
+            <p>
+                <strong>10 % 3 = 1</strong>
+            </p>
+
+        </div>
+
+        <h3>⚡ Exponent</h3>
+
+        <pre><code>print(2 ** 3)</code></pre>
+
+        <p>
+            The <strong>**</strong> operator is used for powers.
+            This means 2 raised to the power of 3.
+        </p>
+
+        <pre><code>8</code></pre>
+
+        <h3>🧠 Complete Example</h3>
 
         <pre><code>a = 10
 b = 3
@@ -433,30 +639,29 @@ print(a + b)
 print(a - b)
 print(a * b)
 print(a / b)
-print(a % b)</code></pre>
+print(a // b)
+print(a % b)
+print(a ** b)</code></pre>
 
-        <h3>🔍 Explanation</h3>
+        <h3>📌 Important Difference</h3>
 
         <div class="explanation">
 
             <p>
-                <strong>+</strong> adds two numbers.
+                <strong>/</strong> gives normal division and can
+                produce a decimal.
             </p>
 
             <p>
-                <strong>-</strong> subtracts numbers.
-            </p>
-
-            <p>
-                <strong>*</strong> multiplies numbers.
-            </p>
-
-            <p>
-                <strong>/</strong> performs division.
+                <strong>//</strong> performs floor division.
             </p>
 
             <p>
                 <strong>%</strong> gives the remainder.
+            </p>
+
+            <p>
+                <strong>**</strong> calculates a power.
             </p>
 
         </div>
@@ -467,26 +672,60 @@ print(a % b)</code></pre>
                 ← Previous
             </button>
 
-            <button class="button" onclick="openLesson('topic08')">
-                Next Topic →
+            <button class="button" onclick="showHome()">
+                🏠 Back to Topics
             </button>
 
         </div>
 
     </section>
 
+</div>
 
-    <!-- ================= TOPIC 08 ================= -->
 
-    <section id="topic08" class="lesson">
+<footer>
 
-        <div class="lesson-number">TOPIC 08</div>
+    <p>
+        © 2026 Programming 1
+    </p>
 
-        <h2>Assignment Operators</h2>
+</footer>
 
-        <p>
-            Assignment operators are used to store and update
-            values inside variables.
-        </p>
 
-        <h3>💻 Basic Assignment
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+function openLesson(topic) {
+
+    document.getElementById("home").style.display = "none";
+
+    const lessons = document.querySelectorAll(".lesson");
+
+    lessons.forEach(function(lesson) {
+        lesson.style.display = "none";
+    });
+
+    document.getElementById(topic).style.display = "block";
+
+    window.scrollTo(0, 0);
+}
+
+
+function showHome() {
+
+    const lessons = document.querySelectorAll(".lesson");
+
+    lessons.forEach(function(lesson) {
+        lesson.style.display = "none";
+    });
+
+    document.getElementById("home").style.display = "block";
+
+    window.scrollTo(0, 0);
+}
+
+</script>
+
+</body>
+</html>
