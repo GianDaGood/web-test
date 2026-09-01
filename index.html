@@ -178,21 +178,29 @@
             background: #475569;
         }
 
-        /* HOME BUTTON - BABA AT GITNA */
+        /* FLOATING HOME BUTTON */
 
         .home-bottom {
-            text-align: center;
-            margin-top: 35px;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
         }
 
         .home-button {
             border: none;
             background: #334155;
             color: white;
-            padding: 12px 16px;
-            border-radius: 8px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             cursor: pointer;
-            font-size: 20px;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
         }
 
         .home-button:hover {
@@ -226,10 +234,6 @@
             .navigation .button {
                 width: 100%;
             }
-
-            .home-bottom .home-button {
-                width: auto;
-            }
         }
     </style>
 </head>
@@ -238,7 +242,7 @@
 
 <header>
     <h1>Programming 1</h1>
-    <p>My Course Website</p>
+    <p>My Test Website</p>
 </header>
 
 <div class="container">
@@ -255,7 +259,7 @@
             </p>
 
             <p>
-                Choose a topic below to start learning.
+                Choose a topic na mababagsak kayo.
             </p>
         </section>
 
@@ -392,13 +396,11 @@ I am 20 years old.</code></pre>
         </div>
 
         <div class="navigation">
-
             <div></div>
 
             <button class="button" onclick="openLesson('topic06')">
                 Next Topic →
             </button>
-
         </div>
 
         <div class="home-bottom">
