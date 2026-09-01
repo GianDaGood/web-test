@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Course Website</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: white;
+        }
+
+        header {
+            padding: 25px;
+            text-align: center;
+            background: #111827;
+            border-bottom: 1px solid #334155;
+        }
+
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #94a3b8;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 30px 20px;
+        }
+
+        .welcome {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .welcome h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .welcome p {
+            color: #cbd5e1;
+            margin-bottom: 30px;
+        }
+
+        .topics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .topic {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 25px;
+            text-decoration: none;
+            color: white;
+            transition: 0.2s;
+        }
+
+        .topic:hover {
+            transform: translateY(-3px);
+            border-color: #64748b;
+        }
+
+        .topic h3 {
+            margin-bottom: 8px;
+        }
+
+        .topic p {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #64748b;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Programming 1</h1>
+    <p>My Course Website</p>
+</header>
+
+<div class="container">
+
+    <section class="welcome">
+        <h2>Welcome! 👋</h2>
+        <p>
+            Learn programming through lessons, examples, and activities.
+        </p>
+    </section>
+
+    <section class="topics">
+
+        <a class="topic" href="#">
+            <h3>📘 Topic 01</h3>
+            <p>Introduction to Programming</p>
+        </a>
+
+        <a class="topic" href="#">
+            <h3>💻 Topic 02</h3>
+            <p>Python Basics</p>
+        </a>
+
+        <a class="topic" href="#">
+            <h3>🔢 Topic 03</h3>
+            <p>Variables and Data Types</p>
+        </a>
+
+        <a class="topic" href="#">
+            <h3>🔄 Topic 04</h3>
+            <p>Conditional Statements</p>
+        </a>
+
+        <a class="topic" href="#">
+            <h3>📚 Topic 05</h3>
+            <p>Loops</p>
+        </a>
+
+        <a class="topic" href="#">
+            <h3>📝 Topic 06</h3>
+            <p>Practice Activities</p>
+        </a>
+
+    </section>
+
+</div>
+
+<footer>
+    <p>© 2026 My Course Website</p>
+</footer>
+
+</body>
+</html>
