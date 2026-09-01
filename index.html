@@ -40,7 +40,7 @@
             padding: 30px 20px;
         }
 
-        /* HOME */
+        /* HOME / TOPIC SELECTION */
 
         .welcome {
             text-align: center;
@@ -154,7 +154,7 @@
             margin-bottom: 12px;
         }
 
-        /* NAVIGATION */
+        /* PREVIOUS / NEXT */
 
         .navigation {
             display: flex;
@@ -178,7 +178,7 @@
             background: #475569;
         }
 
-        /* HOME BUTTON SA BABA */
+        /* HOME BUTTON - BABA AT GITNA */
 
         .home-bottom {
             text-align: center;
@@ -186,8 +186,17 @@
         }
 
         .home-button {
-            font-size: 20px;
+            border: none;
+            background: #334155;
+            color: white;
             padding: 12px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .home-button:hover {
+            background: #475569;
         }
 
         footer {
@@ -239,7 +248,6 @@
     <section id="home">
 
         <section class="welcome">
-
             <h2>Welcome! 👋</h2>
 
             <p>
@@ -249,7 +257,6 @@
             <p>
                 Choose a topic below to start learning.
             </p>
-
         </section>
 
         <section class="topics">
@@ -269,6 +276,21 @@
                 <p>Arithmetic Operators</p>
             </div>
 
+            <div class="topic" onclick="openLesson('topic08')">
+                <h3>➗ Topic 08</h3>
+                <p>Assignment Operators</p>
+            </div>
+
+            <div class="topic" onclick="openLesson('topic09')">
+                <h3>⚖️ Topic 09</h3>
+                <p>Conditional Operators</p>
+            </div>
+
+            <div class="topic" onclick="openLesson('topic10')">
+                <h3>🧠 Topic 10</h3>
+                <p>Logical Operators</p>
+            </div>
+
         </section>
 
     </section>
@@ -278,13 +300,9 @@
 
     <section id="topic05" class="lesson">
 
-        <div class="lesson-number">
-            TOPIC 05
-        </div>
+        <div class="lesson-number">TOPIC 05</div>
 
-        <h2>
-            Python String Formatting
-        </h2>
+        <h2>Python String Formatting</h2>
 
         <p>
             String formatting is used when we want to combine text
@@ -383,11 +401,8 @@ I am 20 years old.</code></pre>
 
         </div>
 
-        <!-- HOME BUTTON -->
         <div class="home-bottom">
-            <button class="button home-button" onclick="showHome()">
-                🏠
-            </button>
+            <button class="home-button" onclick="showHome()">🏠</button>
         </div>
 
     </section>
@@ -397,13 +412,9 @@ I am 20 years old.</code></pre>
 
     <section id="topic06" class="lesson">
 
-        <div class="lesson-number">
-            TOPIC 06
-        </div>
+        <div class="lesson-number">TOPIC 06</div>
 
-        <h2>
-            String Access & Slicing
-        </h2>
+        <h2>String Access & Slicing</h2>
 
         <p>
             A string is a collection of characters. Characters can
@@ -547,19 +558,14 @@ print(word[0:2])</code></pre>
                 ← Previous
             </button>
 
-            <div></div>
-
             <button class="button" onclick="openLesson('topic07')">
                 Next Topic →
             </button>
 
         </div>
 
-        <!-- HOME BUTTON -->
         <div class="home-bottom">
-            <button class="button home-button" onclick="showHome()">
-                🏠
-            </button>
+            <button class="home-button" onclick="showHome()">🏠</button>
         </div>
 
     </section>
@@ -569,13 +575,9 @@ print(word[0:2])</code></pre>
 
     <section id="topic07" class="lesson">
 
-        <div class="lesson-number">
-            TOPIC 07
-        </div>
+        <div class="lesson-number">TOPIC 07</div>
 
-        <h2>
-            Arithmetic Operators
-        </h2>
+        <h2>Arithmetic Operators</h2>
 
         <p>
             Arithmetic operators are symbols used by Python
@@ -746,15 +748,386 @@ print(a % b)</code></pre>
                 ← Previous
             </button>
 
+            <button class="button" onclick="openLesson('topic08')">
+                Next Topic →
+            </button>
+
+        </div>
+
+        <div class="home-bottom">
+            <button class="home-button" onclick="showHome()">🏠</button>
+        </div>
+
+    </section>
+
+
+    <!-- ================= TOPIC 08 ================= -->
+
+    <section id="topic08" class="lesson">
+
+        <div class="lesson-number">TOPIC 08</div>
+
+        <h2>Assignment Operators</h2>
+
+        <p>
+            Assignment operators are used to give a value to a
+            variable or update the value that a variable already has.
+        </p>
+
+        <h3>💻 Basic Assignment</h3>
+
+        <pre><code>x = 10
+
+print(x)</code></pre>
+
+        <p>
+            The <strong>=</strong> operator assigns the value 10
+            to the variable x.
+        </p>
+
+        <h3>📚 Common Assignment Operators</h3>
+
+        <pre><code>=
++=
+-=
+*=
+/=
+%=
+**=</code></pre>
+
+        <h3>💻 Example</h3>
+
+        <pre><code>x = 10
+
+x += 5
+
+print(x)</code></pre>
+
+        <div class="explanation">
+
+            <p>
+                <strong>x = 10</strong> gives x the value 10.
+            </p>
+
+            <p>
+                <strong>x += 5</strong> means add 5 to the current
+                value of x.
+            </p>
+
+            <p>
+                Therefore, x becomes 15.
+            </p>
+
+        </div>
+
+        <h3>🧠 Easy way to remember</h3>
+
+        <div class="explanation">
+
+            <p>
+                Assignment operators are mainly used when we want
+                to <strong>update a variable</strong>.
+            </p>
+
+            <p>
+                For example:
+                <strong>x += 2</strong> means "add 2 to x."
+            </p>
+
+        </div>
+
+        <div class="navigation">
+
+            <button class="button" onclick="openLesson('topic07')">
+                ← Previous
+            </button>
+
+            <button class="button" onclick="openLesson('topic09')">
+                Next Topic →
+            </button>
+
+        </div>
+
+        <div class="home-bottom">
+            <button class="home-button" onclick="showHome()">🏠</button>
+        </div>
+
+    </section>
+
+
+    <!-- ================= TOPIC 09 ================= -->
+
+    <section id="topic09" class="lesson">
+
+        <div class="lesson-number">TOPIC 09</div>
+
+        <h2>Conditional Operators</h2>
+
+        <p>
+            Conditional operators are used to compare values.
+            The result of a comparison is usually either
+            <strong>True</strong> or <strong>False</strong>.
+        </p>
+
+        <h3>📚 Comparison Operators</h3>
+
+        <pre><code>==   Equal to
+!=   Not equal to
+>    Greater than
+<    Less than
+>=   Greater than or equal to
+<=   Less than or equal to</code></pre>
+
+        <h3>💻 Example</h3>
+
+        <pre><code>age = 20
+
+print(age >= 18)</code></pre>
+
+        <p>
+            Output:
+        </p>
+
+        <pre><code>True</code></pre>
+
+        <div class="explanation">
+
+            <p>
+                The expression <strong>age >= 18</strong> asks:
+            </p>
+
+            <p>
+                "Is age greater than or equal to 18?"
+            </p>
+
+            <p>
+                Since age is 20, the answer is
+                <strong>True</strong>.
+            </p>
+
+        </div>
+
+        <h3>🔍 Another Example</h3>
+
+        <pre><code>number = 10
+
+print(number == 5)
+print(number != 5)</code></pre>
+
+        <p>
+            Output:
+        </p>
+
+        <pre><code>False
+True</code></pre>
+
+        <div class="explanation">
+
+            <p>
+                10 is not equal to 5, so
+                <strong>number == 5</strong> is False.
+            </p>
+
+            <p>
+                Because 10 is different from 5,
+                <strong>number != 5</strong> is True.
+            </p>
+
+        </div>
+
+        <h3>🧠 Easy way to understand</h3>
+
+        <div class="explanation">
+
+            <p>
+                Comparison operators are like asking Python a question.
+            </p>
+
+            <p>
+                Example:
+                <strong>10 &gt; 5</strong>
+            </p>
+
+            <p>
+                Python answers:
+                <strong>True</strong>
+            </p>
+
+        </div>
+
+        <div class="navigation">
+
+            <button class="button" onclick="openLesson('topic08')">
+                ← Previous
+            </button>
+
+            <button class="button" onclick="openLesson('topic10')">
+                Next Topic →
+            </button>
+
+        </div>
+
+        <div class="home-bottom">
+            <button class="home-button" onclick="showHome()">🏠</button>
+        </div>
+
+    </section>
+
+
+    <!-- ================= TOPIC 10 ================= -->
+
+    <section id="topic10" class="lesson">
+
+        <div class="lesson-number">TOPIC 10</div>
+
+        <h2>Logical Operators</h2>
+
+        <p>
+            Logical operators are used to combine or modify
+            conditions. They are commonly used when a program
+            needs to check more than one condition.
+        </p>
+
+        <h3>📚 Three Main Logical Operators</h3>
+
+        <pre><code>and
+or
+not</code></pre>
+
+        <h3>🔗 AND</h3>
+
+        <p>
+            The <strong>and</strong> operator is True only when
+            both conditions are True.
+        </p>
+
+        <pre><code>age = 20
+
+print(age >= 18 and age <= 30)</code></pre>
+
+        <p>
+            Output:
+        </p>
+
+        <pre><code>True</code></pre>
+
+        <div class="explanation">
+
+            <p>
+                First condition:
+                <strong>age >= 18</strong> → True
+            </p>
+
+            <p>
+                Second condition:
+                <strong>age <= 30</strong> → True
+            </p>
+
+            <p>
+                Since both conditions are True,
+                the result of <strong>and</strong> is True.
+            </p>
+
+        </div>
+
+        <h3>🔀 OR</h3>
+
+        <p>
+            The <strong>or</strong> operator is True when at least
+            one of the conditions is True.
+        </p>
+
+        <pre><code>number = 5
+
+print(number == 5 or number == 10)</code></pre>
+
+        <p>
+            Output:
+        </p>
+
+        <pre><code>True</code></pre>
+
+        <div class="explanation">
+
+            <p>
+                The first condition is True because number is 5.
+            </p>
+
+            <p>
+                The second condition is False because number is
+                not 10.
+            </p>
+
+            <p>
+                Since at least one condition is True,
+                the result is True.
+            </p>
+
+        </div>
+
+        <h3>🚫 NOT</h3>
+
+        <p>
+            The <strong>not</strong> operator reverses a Boolean value.
+        </p>
+
+        <pre><code>is_student = True
+
+print(not is_student)</code></pre>
+
+        <p>
+            Output:
+        </p>
+
+        <pre><code>False</code></pre>
+
+        <div class="explanation">
+
+            <p>
+                The original value is True.
+            </p>
+
+            <p>
+                Using <strong>not</strong> changes True into False.
+            </p>
+
+            <p>
+                In simple words, <strong>not</strong> means
+                "the opposite."
+            </p>
+
+        </div>
+
+        <h3>🧠 Easy way to remember</h3>
+
+        <div class="explanation">
+
+            <p>
+                <strong>and</strong> → both conditions must be True
+            </p>
+
+            <p>
+                <strong>or</strong> → at least one condition must be True
+            </p>
+
+            <p>
+                <strong>not</strong> → reverses True and False
+            </p>
+
+        </div>
+
+        <div class="navigation">
+
+            <button class="button" onclick="openLesson('topic09')">
+                ← Previous
+            </button>
+
             <div></div>
 
         </div>
 
-        <!-- HOME BUTTON -->
         <div class="home-bottom">
-            <button class="button home-button" onclick="showHome()">
-                🏠
-            </button>
+            <button class="home-button" onclick="showHome()">🏠</button>
         </div>
 
     </section>
@@ -763,7 +1136,7 @@ print(a % b)</code></pre>
 
 
 <footer>
-    Programming 1 • Learning Website
+    <p>© 2026 Programming 1</p>
 </footer>
 
 
