@@ -1,1187 +1,528 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Programming 1</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<title>GameHub - Gaming Website</title>
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #0f172a;
-            color: white;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
 
-        header {
-            padding: 25px 20px;
-            text-align: center;
-            background: #111827;
-            border-bottom: 1px solid #334155;
-        }
+html {
+    scroll-behavior: smooth;
+}
 
-        header h1 {
-            font-size: 28px;
-            margin-bottom: 8px;
-        }
+body {
+    background: #0b0b14;
+    color: white;
+}
 
-        header p {
-            color: #94a3b8;
-        }
+nav {
+    background: #11111d;
+    padding: 18px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #2b2b40;
+}
 
-        .container {
-            max-width: 950px;
-            margin: auto;
-            padding: 30px 20px;
-        }
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #a855f7;
+}
 
-        /* HOME / TOPIC SELECTION */
+.logo span {
+    color: #22d3ee;
+}
 
-        .welcome {
-            text-align: center;
-            padding: 45px 20px;
-        }
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+}
 
-        .welcome h2 {
-            font-size: 38px;
-            margin-bottom: 15px;
-        }
+nav ul li a {
+    color: #ddd;
+    text-decoration: none;
+}
 
-        .welcome p {
-            color: #cbd5e1;
-            margin-bottom: 10px;
-        }
+nav ul li a:hover {
+    color: #a855f7;
+}
 
-        .topics {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-        }
+.hero {
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    padding: 80px 8%;
+    background: linear-gradient(90deg, #0b0b14 25%, rgba(11,11,20,.5)),
+    url("https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1600&q=80");
+    background-size: cover;
+    background-position: center;
+}
 
-        .topic {
-            display: block;
-            background: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 12px;
-            padding: 25px;
-            text-decoration: none;
-            color: white;
-            transition: 0.2s;
-            cursor: pointer;
-        }
+.hero-content {
+    max-width: 600px;
+}
 
-        .topic:hover {
-            transform: translateY(-3px);
-            border-color: #64748b;
-        }
+.hero h1 {
+    font-size: 60px;
+    margin-bottom: 20px;
+}
 
-        .topic h3 {
-            margin-bottom: 8px;
-        }
+.hero h1 span {
+    color: #a855f7;
+}
 
-        .topic p {
-            color: #94a3b8;
-            font-size: 14px;
-        }
+.hero p {
+    color: #bbb;
+    font-size: 17px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
 
-        /* LESSON */
+.hero button {
+    padding: 14px 25px;
+    background: #a855f7;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
 
-        .lesson {
-            display: none;
-            background: #111827;
-            border: 1px solid #334155;
-            border-radius: 16px;
-            padding: 30px;
-            margin-top: 20px;
-        }
+.hero button:hover {
+    background: #9333ea;
+}
 
-        .lesson h2 {
-            font-size: 32px;
-            margin-bottom: 15px;
-        }
+.search-section {
+    padding: 40px 8% 20px;
+}
 
-        .lesson h3 {
-            margin-top: 30px;
-            margin-bottom: 12px;
-        }
+.search-section input {
+    width: 100%;
+    padding: 16px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    background: #171725;
+    color: white;
+    font-size: 16px;
+}
 
-        .lesson p {
-            color: #cbd5e1;
-            line-height: 1.7;
-            margin-bottom: 15px;
-        }
+.categories {
+    padding: 20px 8%;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
 
-        .lesson ul {
-            margin-left: 25px;
-            color: #cbd5e1;
-            line-height: 1.8;
-        }
+.category-btn {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 20px;
+    background: #1d1d2c;
+    color: white;
+    cursor: pointer;
+}
 
-        .lesson-number {
-            color: #94a3b8;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
+.category-btn:hover {
+    background: #a855f7;
+}
 
-        pre {
-            background: #020617;
-            border: 1px solid #334155;
-            padding: 20px;
-            border-radius: 10px;
-            overflow-x: auto;
-            margin: 15px 0;
-        }
+.games {
+    padding: 40px 8%;
+}
 
-        code {
-            font-family: Consolas, monospace;
-            color: #e2e8f0;
-        }
+.games h2 {
+    font-size: 32px;
+    margin-bottom: 30px;
+}
 
-        .explanation {
-            background: #1e293b;
-            border-left: 4px solid #64748b;
-            padding: 18px;
-            border-radius: 8px;
-            margin-top: 15px;
-        }
+.game-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 25px;
+}
 
-        .explanation p {
-            margin-bottom: 12px;
-        }
+.game-card {
+    background: #171725;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: .3s;
+    border: 1px solid #29293d;
+}
 
-        /* PREVIOUS / NEXT */
+.game-card:hover {
+    transform: translateY(-8px);
+    border-color: #a855f7;
+}
 
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
-            margin-top: 35px;
-        }
+.game-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
 
-        .button {
-            border: none;
-            background: #334155;
-            color: white;
-            padding: 12px 18px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 15px;
-        }
+.game-info {
+    padding: 18px;
+}
 
-        .button:hover {
-            background: #475569;
-        }
+.game-info h3 {
+    margin-bottom: 10px;
+}
 
-        /* FLOATING HOME BUTTON */
+.game-info p {
+    color: #aaa;
+    margin-bottom: 15px;
+}
 
-        .home-bottom {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 9999;
-        }
+.game-info button {
+    padding: 10px 15px;
+    border: none;
+    background: #22d3ee;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: bold;
+}
 
-        .home-button {
-            border: none;
-            background: #334155;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 22px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-        }
+.favorite {
+    float: right;
+    font-size: 22px;
+    cursor: pointer;
+}
 
-        .home-button:hover {
-            background: #475569;
-        }
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.85);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
 
-        footer {
-            text-align: center;
-            padding: 30px;
-            color: #64748b;
-        }
+.modal-content {
+    background: #181827;
+    max-width: 500px;
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+}
 
-        @media (max-width: 600px) {
+.modal-content img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
 
-            .welcome h2 {
-                font-size: 30px;
-            }
+.modal-text {
+    padding: 25px;
+}
 
-            .lesson {
-                padding: 22px;
-            }
+.close {
+    float: right;
+    font-size: 30px;
+    cursor: pointer;
+}
 
-            .lesson h2 {
-                font-size: 26px;
-            }
+footer {
+    background: #11111d;
+    text-align: center;
+    padding: 30px;
+    color: #888;
+    margin-top: 40px;
+}
 
-            .navigation {
-                flex-direction: column;
-            }
+@media(max-width:700px) {
 
-            .navigation .button {
-                width: 100%;
-            }
-        }
-    </style>
+    nav ul {
+        display: none;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .hero {
+        padding: 60px 6%;
+    }
+
+    .games,
+    .search-section,
+    .categories {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+}
+</style>
 </head>
 
 <body>
 
-<header>
-    <h1>Programming 1</h1>
-    <p>My Test Website</p>
-</header>
+<nav>
+    <div class="logo">GAME<span>HUB</span></div>
 
-<div class="container">
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#games">Games</a></li>
+        <li><a href="#categories">Categories</a></li>
+    </ul>
+</nav>
 
-    <!-- ================= HOME ================= -->
+<section class="hero" id="home">
 
-    <section id="home">
+    <div class="hero-content">
 
-        <section class="welcome">
-            <h2>Welcome! 👋</h2>
-
-            <p>
-                Learn programming through lessons, examples, and activities.
-            </p>
-
-            <p>
-                Choose a topic na mababagsak kayo.
-            </p>
-        </section>
-
-        <section class="topics">
-
-            <div class="topic" onclick="openLesson('topic05')">
-                <h3>📚 Topic 05</h3>
-                <p>Python String Formatting</p>
-            </div>
-
-            <div class="topic" onclick="openLesson('topic06')">
-                <h3>📝 Topic 06</h3>
-                <p>String Access & Slicing</p>
-            </div>
-
-            <div class="topic" onclick="openLesson('topic07')">
-                <h3>🔢 Topic 07</h3>
-                <p>Arithmetic Operators</p>
-            </div>
-
-            <div class="topic" onclick="openLesson('topic08')">
-                <h3>➗ Topic 08</h3>
-                <p>Assignment Operators</p>
-            </div>
-
-            <div class="topic" onclick="openLesson('topic09')">
-                <h3>⚖️ Topic 09</h3>
-                <p>Conditional Operators</p>
-            </div>
-
-            <div class="topic" onclick="openLesson('topic10')">
-                <h3>🧠 Topic 10</h3>
-                <p>Logical Operators</p>
-            </div>
-
-        </section>
-
-    </section>
-
-
-    <!-- ================= TOPIC 05 ================= -->
-
-    <section id="topic05" class="lesson">
-
-        <div class="lesson-number">TOPIC 05</div>
-
-        <h2>Python String Formatting</h2>
+        <h1>Find Your Next <span>Adventure</span></h1>
 
         <p>
-            String formatting is used when we want to combine text
-            with information stored inside variables.
+            Discover amazing games, explore different genres,
+            and find your next favorite gaming experience.
         </p>
 
-        <p>
-            For example, if we have a student's name and age,
-            we can put those values directly into a sentence.
-        </p>
+        <button onclick="document.getElementById('games').scrollIntoView()">
+            Explore Games
+        </button>
 
-        <h3>🎯 What will you learn?</h3>
+    </div>
 
-        <ul>
-            <li>What string formatting means</li>
-            <li>How f-strings work</li>
-            <li>How to put variables inside text</li>
-            <li>How to create clean program output</li>
-        </ul>
+</section>
 
-        <h3>💻 Example</h3>
+<section class="search-section">
 
-        <pre><code>name = "Gian"
-age = 20
+    <input
+        type="text"
+        id="search"
+        placeholder="🔍 Search for a game..."
+        onkeyup="searchGames()"
+    >
 
-print(f"My name is {name}.")
-print(f"I am {age} years old.")</code></pre>
+</section>
 
-        <h3>🔍 Explanation</h3>
+<section class="categories" id="categories">
 
-        <div class="explanation">
+    <button class="category-btn" onclick="filterGames('All')">All</button>
+    <button class="category-btn" onclick="filterGames('Action')">Action</button>
+    <button class="category-btn" onclick="filterGames('RPG')">RPG</button>
+    <button class="category-btn" onclick="filterGames('Sports')">Sports</button>
+    <button class="category-btn" onclick="filterGames('Adventure')">Adventure</button>
+    <button class="category-btn" onclick="filterGames('Shooter')">Shooter</button>
 
-            <p>
-                <strong>name = "Gian"</strong> creates a variable
-                called <strong>name</strong> and stores "Gian".
-            </p>
+</section>
 
-            <p>
-                <strong>age = 20</strong> creates a variable called
-                <strong>age</strong> and stores the number 20.
-            </p>
+<section class="games" id="games">
 
-            <p>
-                The letter <strong>f</strong> before the quotation marks
-                means that we are using an <strong>f-string</strong>.
-            </p>
+    <h2>🔥 Trending Games</h2>
 
-            <p>
-                An f-string allows us to place variables inside
-                curly brackets, such as <strong>{name}</strong>.
-            </p>
+    <div class="game-container" id="gameContainer"></div>
 
-            <p>
-                Python replaces the curly brackets with the actual
-                value stored in the variable.
-            </p>
+</section>
+
+<div class="modal" id="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-text">
+
+            <span class="close" onclick="closeModal()">&times;</span>
+
+            <img id="modalImage">
+
+            <h2 id="modalTitle"></h2>
+
+            <br>
+
+            <p id="modalDescription"></p>
 
         </div>
 
-        <h3>📌 Output</h3>
-
-        <pre><code>My name is Gian.
-I am 20 years old.</code></pre>
-
-        <h3>🧠 Simple way to understand it</h3>
-
-        <div class="explanation">
-
-            <p>
-                Think of an f-string as a sentence with a blank space.
-            </p>
-
-            <p>
-                "My name is ______."
-            </p>
-
-            <p>
-                If the variable contains "Gian", Python puts
-                "Gian" into that blank.
-            </p>
-
-            <p>
-                So the final sentence becomes:
-                <strong>My name is Gian.</strong>
-            </p>
-
-        </div>
-
-        <div class="navigation">
-            <div></div>
-
-            <button class="button" onclick="openLesson('topic06')">
-                Next Topic →
-            </button>
-        </div>
-
-        <div class="home-bottom">
-            <button class="home-button" onclick="showHome()">🏠</button>
-        </div>
-
-    </section>
-
-
-    <!-- ================= TOPIC 06 ================= -->
-
-    <section id="topic06" class="lesson">
-
-        <div class="lesson-number">TOPIC 06</div>
-
-        <h2>String Access & Slicing</h2>
-
-        <p>
-            A string is a collection of characters. Characters can
-            be letters, numbers, spaces, or symbols.
-        </p>
-
-        <p>
-            Python allows us to access individual characters
-            using their index.
-        </p>
-
-        <h3>🎯 What will you learn?</h3>
-
-        <ul>
-            <li>What an index is</li>
-            <li>How Python counts characters</li>
-            <li>How to access a specific character</li>
-            <li>How negative indexes work</li>
-            <li>How string slicing works</li>
-        </ul>
-
-        <h3>💻 Example</h3>
-
-        <pre><code>word = "PYTHON"
-
-print(word[0])
-print(word[1])
-print(word[-1])</code></pre>
-
-        <h3>🔍 Understanding Indexes</h3>
-
-        <div class="explanation">
-
-            <p>
-                Python starts counting at <strong>0</strong>,
-                not 1.
-            </p>
-
-            <p>
-                For the word <strong>PYTHON</strong>:
-            </p>
-
-            <p>
-                P → index 0<br>
-                Y → index 1<br>
-                T → index 2<br>
-                H → index 3<br>
-                O → index 4<br>
-                N → index 5
-            </p>
-
-        </div>
-
-        <h3>📌 Accessing a Character</h3>
-
-        <pre><code>word = "PYTHON"
-
-print(word[0])</code></pre>
-
-        <p>
-            The output is:
-        </p>
-
-        <pre><code>P</code></pre>
-
-        <p>
-            This happens because P is located at index 0.
-        </p>
-
-        <h3>🔄 Negative Index</h3>
-
-        <pre><code>word = "PYTHON"
-
-print(word[-1])</code></pre>
-
-        <p>
-            The output is:
-        </p>
-
-        <pre><code>N</code></pre>
-
-        <div class="explanation">
-
-            <p>
-                Negative indexes allow us to count from the end
-                of a string.
-            </p>
-
-            <p>
-                <strong>-1</strong> means the last character.
-            </p>
-
-            <p>
-                Therefore, <strong>word[-1]</strong> gives us
-                <strong>N</strong>.
-            </p>
-
-        </div>
-
-        <h3>✂️ String Slicing</h3>
-
-        <p>
-            Slicing means getting only a part of a string.
-        </p>
-
-        <pre><code>word = "PYTHON"
-
-print(word[0:2])</code></pre>
-
-        <p>
-            The output is:
-        </p>
-
-        <pre><code>PY</code></pre>
-
-        <div class="explanation">
-
-            <p>
-                The first number is the starting index.
-            </p>
-
-            <p>
-                The second number is where Python stops.
-            </p>
-
-            <p>
-                The starting index is included, but the ending
-                index is not included.
-            </p>
-
-            <p>
-                Therefore, <strong>word[0:2]</strong> gets index
-                0 and index 1, giving us <strong>PY</strong>.
-            </p>
-
-        </div>
-
-        <div class="navigation">
-
-            <button class="button" onclick="openLesson('topic05')">
-                ← Previous
-            </button>
-
-            <button class="button" onclick="openLesson('topic07')">
-                Next Topic →
-            </button>
-
-        </div>
-
-        <div class="home-bottom">
-            <button class="home-button" onclick="showHome()">🏠</button>
-        </div>
-
-    </section>
-
-
-    <!-- ================= TOPIC 07 ================= -->
-
-    <section id="topic07" class="lesson">
-
-        <div class="lesson-number">TOPIC 07</div>
-
-        <h2>Arithmetic Operators</h2>
-
-        <p>
-            Arithmetic operators are symbols used by Python
-            to perform mathematical calculations.
-        </p>
-
-        <p>
-            They allow our programs to add, subtract, multiply,
-            divide, and perform other mathematical operations.
-        </p>
-
-        <h3>🎯 What will you learn?</h3>
-
-        <ul>
-            <li>Addition</li>
-            <li>Subtraction</li>
-            <li>Multiplication</li>
-            <li>Division</li>
-            <li>Floor division</li>
-            <li>Remainder</li>
-            <li>Exponent</li>
-        </ul>
-
-        <h3>📚 Arithmetic Operators</h3>
-
-        <pre><code>+    Addition
--    Subtraction
-*    Multiplication
-/    Division
-//   Floor Division
-%    Remainder
-**   Exponent</code></pre>
-
-        <h3>💻 Example</h3>
-
-        <pre><code>a = 10
-b = 3
-
-print(a + b)
-print(a - b)
-print(a * b)
-print(a / b)
-print(a % b)</code></pre>
-
-        <h3>🔍 Explanation</h3>
-
-        <div class="explanation">
-
-            <p>
-                <strong>a = 10</strong> means that the variable
-                a contains the number 10.
-            </p>
-
-            <p>
-                <strong>b = 3</strong> means that the variable
-                b contains the number 3.
-            </p>
-
-            <p>
-                When we write <strong>a + b</strong>, Python
-                adds 10 and 3, resulting in 13.
-            </p>
-
-        </div>
-
-        <h3>➕ Addition</h3>
-
-        <pre><code>10 + 3</code></pre>
-
-        <p>
-            Result:
-        </p>
-
-        <pre><code>13</code></pre>
-
-        <p>
-            The <strong>+</strong> operator is used to add numbers.
-        </p>
-
-        <h3>➖ Subtraction</h3>
-
-        <pre><code>10 - 3</code></pre>
-
-        <p>
-            Result:
-        </p>
-
-        <pre><code>7</code></pre>
-
-        <p>
-            The <strong>-</strong> operator subtracts the second
-            number from the first.
-        </p>
-
-        <h3>✖️ Multiplication</h3>
-
-        <pre><code>10 * 3</code></pre>
-
-        <p>
-            Result:
-        </p>
-
-        <pre><code>30</code></pre>
-
-        <p>
-            The <strong>*</strong> operator multiplies numbers.
-        </p>
-
-        <h3>➗ Division</h3>
-
-        <pre><code>10 / 3</code></pre>
-
-        <p>
-            Result:
-        </p>
-
-        <pre><code>3.3333333333333335</code></pre>
-
-        <p>
-            The <strong>/</strong> operator performs normal division.
-        </p>
-
-        <h3>🧮 Remainder</h3>
-
-        <pre><code>10 % 3</code></pre>
-
-        <p>
-            Result:
-        </p>
-
-        <pre><code>1</code></pre>
-
-        <div class="explanation">
-
-            <p>
-                The <strong>%</strong> operator gives the remainder
-                after division.
-            </p>
-
-            <p>
-                10 divided by 3 gives 3 with a remainder of 1.
-            </p>
-
-            <p>
-                Therefore:
-                <strong>10 % 3 = 1</strong>
-            </p>
-
-        </div>
-
-        <h3>🧠 Easy way to remember</h3>
-
-        <div class="explanation">
-
-            <p><strong>+</strong> → Add</p>
-            <p><strong>-</strong> → Subtract</p>
-            <p><strong>*</strong> → Multiply</p>
-            <p><strong>/</strong> → Divide</p>
-            <p><strong>%</strong> → Remainder</p>
-            <p><strong>//</strong> → Floor division</p>
-            <p><strong>**</strong> → Power / exponent</p>
-
-        </div>
-
-        <div class="navigation">
-
-            <button class="button" onclick="openLesson('topic06')">
-                ← Previous
-            </button>
-
-            <button class="button" onclick="openLesson('topic08')">
-                Next Topic →
-            </button>
-
-        </div>
-
-        <div class="home-bottom">
-            <button class="home-button" onclick="showHome()">🏠</button>
-        </div>
-
-    </section>
-
-
-    <!-- ================= TOPIC 08 ================= -->
-
-    <section id="topic08" class="lesson">
-
-        <div class="lesson-number">TOPIC 08</div>
-
-        <h2>Assignment Operators</h2>
-
-        <p>
-            Assignment operators are used to give a value to a
-            variable or update the value that a variable already has.
-        </p>
-
-        <h3>💻 Basic Assignment</h3>
-
-        <pre><code>x = 10
-
-print(x)</code></pre>
-
-        <p>
-            The <strong>=</strong> operator assigns the value 10
-            to the variable x.
-        </p>
-
-        <h3>📚 Common Assignment Operators</h3>
-
-        <pre><code>=
-+=
--=
-*=
-/=
-%=
-**=</code></pre>
-
-        <h3>💻 Example</h3>
-
-        <pre><code>x = 10
-
-x += 5
-
-print(x)</code></pre>
-
-        <div class="explanation">
-
-            <p>
-                <strong>x = 10</strong> gives x the value 10.
-            </p>
-
-            <p>
-                <strong>x += 5</strong> means add 5 to the current
-                value of x.
-            </p>
-
-            <p>
-                Therefore, x becomes 15.
-            </p>
-
-        </div>
-
-        <h3>🧠 Easy way to remember</h3>
-
-        <div class="explanation">
-
-            <p>
-                Assignment operators are mainly used when we want
-                to <strong>update a variable</strong>.
-            </p>
-
-            <p>
-                For example:
-                <strong>x += 2</strong> means "add 2 to x."
-            </p>
-
-        </div>
-
-        <div class="navigation">
-
-            <button class="button" onclick="openLesson('topic07')">
-                ← Previous
-            </button>
-
-            <button class="button" onclick="openLesson('topic09')">
-                Next Topic →
-            </button>
-
-        </div>
-
-        <div class="home-bottom">
-            <button class="home-button" onclick="showHome()">🏠</button>
-        </div>
-
-    </section>
-
-
-    <!-- ================= TOPIC 09 ================= -->
-
-    <section id="topic09" class="lesson">
-
-        <div class="lesson-number">TOPIC 09</div>
-
-        <h2>Conditional Operators</h2>
-
-        <p>
-            Conditional operators are used to compare values.
-            The result of a comparison is usually either
-            <strong>True</strong> or <strong>False</strong>.
-        </p>
-
-        <h3>📚 Comparison Operators</h3>
-
-        <pre><code>==   Equal to
-!=   Not equal to
->    Greater than
-<    Less than
->=   Greater than or equal to
-<=   Less than or equal to</code></pre>
-
-        <h3>💻 Example</h3>
-
-        <pre><code>age = 20
-
-print(age >= 18)</code></pre>
-
-        <p>
-            Output:
-        </p>
-
-        <pre><code>True</code></pre>
-
-        <div class="explanation">
-
-            <p>
-                The expression <strong>age >= 18</strong> asks:
-            </p>
-
-            <p>
-                "Is age greater than or equal to 18?"
-            </p>
-
-            <p>
-                Since age is 20, the answer is
-                <strong>True</strong>.
-            </p>
-
-        </div>
-
-        <h3>🔍 Another Example</h3>
-
-        <pre><code>number = 10
-
-print(number == 5)
-print(number != 5)</code></pre>
-
-        <p>
-            Output:
-        </p>
-
-        <pre><code>False
-True</code></pre>
-
-        <div class="explanation">
-
-            <p>
-                10 is not equal to 5, so
-                <strong>number == 5</strong> is False.
-            </p>
-
-            <p>
-                Because 10 is different from 5,
-                <strong>number != 5</strong> is True.
-            </p>
-
-        </div>
-
-        <h3>🧠 Easy way to understand</h3>
-
-        <div class="explanation">
-
-            <p>
-                Comparison operators are like asking Python a question.
-            </p>
-
-            <p>
-                Example:
-                <strong>10 &gt; 5</strong>
-            </p>
-
-            <p>
-                Python answers:
-                <strong>True</strong>
-            </p>
-
-        </div>
-
-        <div class="navigation">
-
-            <button class="button" onclick="openLesson('topic08')">
-                ← Previous
-            </button>
-
-            <button class="button" onclick="openLesson('topic10')">
-                Next Topic →
-            </button>
-
-        </div>
-
-        <div class="home-bottom">
-            <button class="home-button" onclick="showHome()">🏠</button>
-        </div>
-
-    </section>
-
-
-    <!-- ================= TOPIC 10 ================= -->
-
-    <section id="topic10" class="lesson">
-
-        <div class="lesson-number">TOPIC 10</div>
-
-        <h2>Logical Operators</h2>
-
-        <p>
-            Logical operators are used to combine or modify
-            conditions. They are commonly used when a program
-            needs to check more than one condition.
-        </p>
-
-        <h3>📚 Three Main Logical Operators</h3>
-
-        <pre><code>and
-or
-not</code></pre>
-
-        <h3>🔗 AND</h3>
-
-        <p>
-            The <strong>and</strong> operator is True only when
-            both conditions are True.
-        </p>
-
-        <pre><code>age = 20
-
-print(age >= 18 and age <= 30)</code></pre>
-
-        <p>
-            Output:
-        </p>
-
-        <pre><code>True</code></pre>
-
-        <div class="explanation">
-
-            <p>
-                First condition:
-                <strong>age >= 18</strong> → True
-            </p>
-
-            <p>
-                Second condition:
-                <strong>age <= 30</strong> → True
-            </p>
-
-            <p>
-                Since both conditions are True,
-                the result of <strong>and</strong> is True.
-            </p>
-
-        </div>
-
-        <h3>🔀 OR</h3>
-
-        <p>
-            The <strong>or</strong> operator is True when at least
-            one of the conditions is True.
-        </p>
-
-        <pre><code>number = 5
-
-print(number == 5 or number == 10)</code></pre>
-
-        <p>
-            Output:
-        </p>
-
-        <pre><code>True</code></pre>
-
-        <div class="explanation">
-
-            <p>
-                The first condition is True because number is 5.
-            </p>
-
-            <p>
-                The second condition is False because number is
-                not 10.
-            </p>
-
-            <p>
-                Since at least one condition is True,
-                the result is True.
-            </p>
-
-        </div>
-
-        <h3>🚫 NOT</h3>
-
-        <p>
-            The <strong>not</strong> operator reverses a Boolean value.
-        </p>
-
-        <pre><code>is_student = True
-
-print(not is_student)</code></pre>
-
-        <p>
-            Output:
-        </p>
-
-        <pre><code>False</code></pre>
-
-        <div class="explanation">
-
-            <p>
-                The original value is True.
-            </p>
-
-            <p>
-                Using <strong>not</strong> changes True into False.
-            </p>
-
-            <p>
-                In simple words, <strong>not</strong> means
-                "the opposite."
-            </p>
-
-        </div>
-
-        <h3>🧠 Easy way to remember</h3>
-
-        <div class="explanation">
-
-            <p>
-                <strong>and</strong> → both conditions must be True
-            </p>
-
-            <p>
-                <strong>or</strong> → at least one condition must be True
-            </p>
-
-            <p>
-                <strong>not</strong> → reverses True and False
-            </p>
-
-        </div>
-
-        <div class="navigation">
-
-            <button class="button" onclick="openLesson('topic09')">
-                ← Previous
-            </button>
-
-            <div></div>
-
-        </div>
-
-        <div class="home-bottom">
-            <button class="home-button" onclick="showHome()">🏠</button>
-        </div>
-
-    </section>
+    </div>
 
 </div>
 
-
 <footer>
-    <p>© 2026 Programming 1</p>
+    <p>© 2026 GAMEHUB | Gaming Website</p>
 </footer>
-
 
 <script>
 
-    function openLesson(topic) {
+const games = [
 
-        document.getElementById("home").style.display = "none";
+{
+title: "Cyber Legends",
+category: "Action",
+image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80",
+description: "Enter a futuristic cyber world filled with dangerous missions and powerful enemies."
+},
 
-        const lessons = document.querySelectorAll(".lesson");
+{
+title: "Shadow Realm",
+category: "RPG",
+image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80",
+description: "Explore magical kingdoms, fight enemies and become a legendary hero."
+},
 
-        lessons.forEach(function(lesson) {
-            lesson.style.display = "none";
-        });
+{
+title: "Speed Masters",
+category: "Sports",
+image: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&w=600&q=80",
+description: "Race against the best competitors and become the ultimate champion."
+},
 
-        const selectedLesson = document.getElementById(topic);
+{
+title: "Lost Island",
+category: "Adventure",
+image: "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=600&q=80",
+description: "Explore a mysterious island filled with secrets and hidden treasures."
+},
 
-        if (selectedLesson) {
-            selectedLesson.style.display = "block";
-        }
+{
+title: "War Zone X",
+category: "Shooter",
+image: "https://images.unsplash.com/photo-1542751110-97427bbecf20?auto=format&fit=crop&w=600&q=80",
+description: "Fight intense battles and dominate the battlefield."
+},
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+{
+title: "Dragon Quest",
+category: "RPG",
+image: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80",
+description: "Fight powerful dragons and save the kingdom from destruction."
+},
+
+{
+title: "Street Fighter Pro",
+category: "Action",
+image: "https://images.unsplash.com/photo-1547394765-185e1e68f34e?auto=format&fit=crop&w=600&q=80",
+description: "Master your fighting skills and defeat legendary opponents."
+},
+
+{
+title: "Galaxy Explorer",
+category: "Adventure",
+image: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=600&q=80",
+description: "Travel across the galaxy and discover new planets."
+}
+
+];
+
+function displayGames(gameList) {
+
+    const container = document.getElementById("gameContainer");
+
+    container.innerHTML = "";
+
+    if(gameList.length === 0) {
+
+        container.innerHTML = "<p>No games found.</p>";
+
+        return;
     }
 
+    gameList.forEach((game, index) => {
 
-    function showHome() {
+        container.innerHTML += `
 
-        const lessons = document.querySelectorAll(".lesson");
+        <div class="game-card">
 
-        lessons.forEach(function(lesson) {
-            lesson.style.display = "none";
-        });
+            <img src="${game.image}">
 
-        document.getElementById("home").style.display = "block";
+            <div class="game-info">
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+                <h3>${game.title}</h3>
+
+                <p>${game.category}</p>
+
+                <button onclick="showDetails(${index})">
+                    View Details
+                </button>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+function searchGames() {
+
+    const searchValue =
+    document.getElementById("search").value.toLowerCase();
+
+    const filteredGames = games.filter(game =>
+        game.title.toLowerCase().includes(searchValue)
+    );
+
+    displayGames(filteredGames);
+
+}
+
+function filterGames(category) {
+
+    if(category === "All") {
+
+        displayGames(games);
+
+    } else {
+
+        const filteredGames = games.filter(game =>
+            game.category === category
+        );
+
+        displayGames(filteredGames);
+
     }
+
+}
+
+function showDetails(index) {
+
+    const game = games[index];
+
+    document.getElementById("modalImage").src = game.image;
+
+    document.getElementById("modalTitle").innerText = game.title;
+
+    document.getElementById("modalDescription").innerText =
+    game.description;
+
+    document.getElementById("modal").style.display = "flex";
+
+}
+
+function closeModal() {
+
+    document.getElementById("modal").style.display = "none";
+
+}
+
+window.onclick = function(event) {
+
+    const modal = document.getElementById("modal");
+
+    if(event.target === modal) {
+
+        modal.style.display = "none";
+
+    }
+
+}
+
+displayGames(games);
 
 </script>
 
