@@ -3,526 +3,658 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>GameHub - Gaming Website</title>
+<title>GAMEVERSE ARCADE</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    background: #0b0b14;
-    color: white;
-}
-
-nav {
-    background: #11111d;
-    padding: 18px 8%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 1px solid #2b2b40;
-}
-
-.logo {
-    font-size: 28px;
-    font-weight: bold;
-    color: #a855f7;
-}
-
-.logo span {
-    color: #22d3ee;
-}
-
-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 25px;
-}
-
-nav ul li a {
-    color: #ddd;
-    text-decoration: none;
-}
-
-nav ul li a:hover {
-    color: #a855f7;
-}
-
-.hero {
-    min-height: 500px;
-    display: flex;
-    align-items: center;
-    padding: 80px 8%;
-    background: linear-gradient(90deg, #0b0b14 25%, rgba(11,11,20,.5)),
-    url("https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1600&q=80");
-    background-size: cover;
-    background-position: center;
-}
-
-.hero-content {
-    max-width: 600px;
-}
-
-.hero h1 {
-    font-size: 60px;
-    margin-bottom: 20px;
-}
-
-.hero h1 span {
-    color: #a855f7;
-}
-
-.hero p {
-    color: #bbb;
-    font-size: 17px;
-    line-height: 1.6;
-    margin-bottom: 25px;
-}
-
-.hero button {
-    padding: 14px 25px;
-    background: #a855f7;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.hero button:hover {
-    background: #9333ea;
-}
-
-.search-section {
-    padding: 40px 8% 20px;
-}
-
-.search-section input {
-    width: 100%;
-    padding: 16px;
-    border-radius: 10px;
-    border: 1px solid #333;
-    background: #171725;
-    color: white;
-    font-size: 16px;
-}
-
-.categories {
-    padding: 20px 8%;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.category-btn {
-    padding: 10px 18px;
-    border: none;
-    border-radius: 20px;
-    background: #1d1d2c;
-    color: white;
-    cursor: pointer;
-}
-
-.category-btn:hover {
-    background: #a855f7;
-}
-
-.games {
-    padding: 40px 8%;
-}
-
-.games h2 {
-    font-size: 32px;
-    margin-bottom: 30px;
-}
-
-.game-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 25px;
-}
-
-.game-card {
-    background: #171725;
-    border-radius: 15px;
-    overflow: hidden;
-    transition: .3s;
-    border: 1px solid #29293d;
-}
-
-.game-card:hover {
-    transform: translateY(-8px);
-    border-color: #a855f7;
-}
-
-.game-card img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-}
-
-.game-info {
-    padding: 18px;
-}
-
-.game-info h3 {
-    margin-bottom: 10px;
-}
-
-.game-info p {
-    color: #aaa;
-    margin-bottom: 15px;
-}
-
-.game-info button {
-    padding: 10px 15px;
-    border: none;
-    background: #22d3ee;
-    border-radius: 7px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.favorite {
-    float: right;
-    font-size: 22px;
-    cursor: pointer;
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.85);
-    z-index: 2000;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
-.modal-content {
-    background: #181827;
-    max-width: 500px;
-    width: 100%;
-    border-radius: 15px;
-    overflow: hidden;
-}
-
-.modal-content img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-}
-
-.modal-text {
-    padding: 25px;
-}
-
-.close {
-    float: right;
-    font-size: 30px;
-    cursor: pointer;
-}
-
-footer {
-    background: #11111d;
-    text-align: center;
-    padding: 30px;
-    color: #888;
-    margin-top: 40px;
-}
-
-@media(max-width:700px) {
-
-    nav ul {
-        display: none;
-    }
-
-    .hero h1 {
-        font-size: 40px;
-    }
-
-    .hero {
-        padding: 60px 6%;
-    }
-
-    .games,
-    .search-section,
-    .categories {
-        padding-left: 5%;
-        padding-right: 5%;
-    }
-}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#080812;color:#fff;text-align:center}
+header{padding:25px;background:linear-gradient(90deg,#7c3aed,#06b6d4)}
+h1{font-size:clamp(28px,6vw,55px)}
+header p{margin-top:8px;color:#eee}
+.games{max-width:1200px;margin:auto;padding:25px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.card{background:#151525;border:1px solid #30304a;border-radius:15px;padding:20px;cursor:pointer;transition:.25s}
+.card:hover{transform:translateY(-5px);border-color:#a855f7}
+.card h2{margin-bottom:10px}.card p{color:#aaa;margin-bottom:15px}
+button{border:0;border-radius:8px;padding:10px 16px;background:#a855f7;color:white;font-weight:bold;cursor:pointer;margin:5px}
+button:hover{filter:brightness(1.15)}
+#gameArea{display:none;padding:20px;max-width:900px;margin:auto}
+#gameTitle{font-size:30px;margin:15px}
+canvas{background:#05050b;border:3px solid #a855f7;border-radius:10px;max-width:100%;touch-action:none}
+.info{margin:10px;color:#bbb}
+.back{background:#ef4444}
+.controls{margin:15px}
+.gameBox{background:#121220;padding:20px;border-radius:15px;margin:auto;max-width:600px}
+.hidden{display:none}
+#tttBoard{display:grid;grid-template-columns:repeat(3,100px);gap:8px;justify-content:center;margin:20px auto}
+.cell{width:100px;height:100px;background:#222238;border-radius:10px;font-size:45px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+#rpsResult{font-size:24px;margin:15px}
+@media(max-width:500px){#tttBoard{grid-template-columns:repeat(3,80px)}.cell{width:80px;height:80px}}
 </style>
 </head>
 
 <body>
 
-<nav>
-    <div class="logo">GAME<span>HUB</span></div>
+<header>
+<h1>🎮 GAMEVERSE ARCADE</h1>
+<p>8 Playable Mini Games • Choose a game and start playing!</p>
+</header>
 
-    <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#games">Games</a></li>
-        <li><a href="#categories">Categories</a></li>
-    </ul>
-</nav>
+<section class="games" id="menu">
 
-<section class="hero" id="home">
-
-    <div class="hero-content">
-
-        <h1>Find Your Next <span>Adventure</span></h1>
-
-        <p>
-            Discover amazing games, explore different genres,
-            and find your next favorite gaming experience.
-        </p>
-
-        <button onclick="document.getElementById('games').scrollIntoView()">
-            Explore Games
-        </button>
-
-    </div>
-
-</section>
-
-<section class="search-section">
-
-    <input
-        type="text"
-        id="search"
-        placeholder="🔍 Search for a game..."
-        onkeyup="searchGames()"
-    >
-
-</section>
-
-<section class="categories" id="categories">
-
-    <button class="category-btn" onclick="filterGames('All')">All</button>
-    <button class="category-btn" onclick="filterGames('Action')">Action</button>
-    <button class="category-btn" onclick="filterGames('RPG')">RPG</button>
-    <button class="category-btn" onclick="filterGames('Sports')">Sports</button>
-    <button class="category-btn" onclick="filterGames('Adventure')">Adventure</button>
-    <button class="category-btn" onclick="filterGames('Shooter')">Shooter</button>
-
-</section>
-
-<section class="games" id="games">
-
-    <h2>🔥 Trending Games</h2>
-
-    <div class="game-container" id="gameContainer"></div>
-
-</section>
-
-<div class="modal" id="modal">
-
-    <div class="modal-content">
-
-        <div class="modal-text">
-
-            <span class="close" onclick="closeModal()">&times;</span>
-
-            <img id="modalImage">
-
-            <h2 id="modalTitle"></h2>
-
-            <br>
-
-            <p id="modalDescription"></p>
-
-        </div>
-
-    </div>
-
+<div class="card" onclick="openGame('snake')">
+<h2>🐍 Snake</h2>
+<p>Eat food and grow as long as possible.</p>
+<button>PLAY NOW</button>
 </div>
 
-<footer>
-    <p>© 2026 GAMEHUB | Gaming Website</p>
-</footer>
+<div class="card" onclick="openGame('car')">
+<h2>🚗 Car Dodge</h2>
+<p>Avoid the incoming cars.</p>
+<button>PLAY NOW</button>
+</div>
+
+<div class="card" onclick="openGame('space')">
+<h2>👾 Space Shooter</h2>
+<p>Shoot enemies and get points.</p>
+<button>PLAY NOW</button>
+</div>
+
+<div class="card" onclick="openGame('dino')">
+<h2>🦖 Dino Runner</h2>
+<p>Jump over obstacles.</p>
+<button>PLAY NOW</button>
+</div>
+
+<div class="card" onclick="openGame('target')">
+<h2>🎯 Target Shooter</h2>
+<p>Click the target before time runs out.</p>
+<button>PLAY NOW</button>
+</div>
+
+<div class="card" onclick="openGame('brick')">
+<h2>🧱 Brick Breaker</h2>
+<p>Break all the bricks!</p>
+<button>PLAY NOW</button>
+</div>
+
+<div class="card" onclick="openGame('ttt')">
+<h2>❌ Tic Tac Toe</h2>
+<p>Play against a friend.</p>
+<button>PLAY NOW</button>
+</div>
+
+<div class="card" onclick="openGame('rps')">
+<h2>✊ Rock Paper Scissors</h2>
+<p>Beat the computer.</p>
+<button>PLAY NOW</button>
+</div>
+
+</section>
+
+<section id="gameArea">
+
+<button class="back" onclick="backMenu()">⬅ BACK TO MENU</button>
+
+<h2 id="gameTitle"></h2>
+
+<div id="canvasGame" class="hidden">
+<canvas id="canvas" width="500" height="400"></canvas>
+<div class="info" id="gameInfo"></div>
+<div class="controls" id="controls"></div>
+</div>
+
+<div id="specialGame" class="hidden"></div>
+
+</section>
 
 <script>
 
-const games = [
+const menu=document.getElementById("menu");
+const gameArea=document.getElementById("gameArea");
+const title=document.getElementById("gameTitle");
+const canvas=document.getElementById("canvas");
+const ctx=canvas.getContext("2d");
+const canvasGame=document.getElementById("canvasGame");
+const specialGame=document.getElementById("specialGame");
+const info=document.getElementById("gameInfo");
+const controls=document.getElementById("controls");
 
-{
-title: "Cyber Legends",
-category: "Action",
-image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80",
-description: "Enter a futuristic cyber world filled with dangerous missions and powerful enemies."
-},
+let animation=null;
+let currentGame="";
 
-{
-title: "Shadow Realm",
-category: "RPG",
-image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80",
-description: "Explore magical kingdoms, fight enemies and become a legendary hero."
-},
-
-{
-title: "Speed Masters",
-category: "Sports",
-image: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&w=600&q=80",
-description: "Race against the best competitors and become the ultimate champion."
-},
-
-{
-title: "Lost Island",
-category: "Adventure",
-image: "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=600&q=80",
-description: "Explore a mysterious island filled with secrets and hidden treasures."
-},
-
-{
-title: "War Zone X",
-category: "Shooter",
-image: "https://images.unsplash.com/photo-1542751110-97427bbecf20?auto=format&fit=crop&w=600&q=80",
-description: "Fight intense battles and dominate the battlefield."
-},
-
-{
-title: "Dragon Quest",
-category: "RPG",
-image: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80",
-description: "Fight powerful dragons and save the kingdom from destruction."
-},
-
-{
-title: "Street Fighter Pro",
-category: "Action",
-image: "https://images.unsplash.com/photo-1547394765-185e1e68f34e?auto=format&fit=crop&w=600&q=80",
-description: "Master your fighting skills and defeat legendary opponents."
-},
-
-{
-title: "Galaxy Explorer",
-category: "Adventure",
-image: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=600&q=80",
-description: "Travel across the galaxy and discover new planets."
+function stopGame(){
+    if(animation) cancelAnimationFrame(animation);
+    animation=null;
 }
 
-];
+function openGame(game){
+    stopGame();
+    currentGame=game;
+    menu.style.display="none";
+    gameArea.style.display="block";
+    canvasGame.classList.add("hidden");
+    specialGame.classList.add("hidden");
+    specialGame.innerHTML="";
+    controls.innerHTML="";
+    info.innerHTML="";
 
-function displayGames(gameList) {
+    if(game==="snake") snakeGame();
+    if(game==="car") carGame();
+    if(game==="space") spaceGame();
+    if(game==="dino") dinoGame();
+    if(game==="target") targetGame();
+    if(game==="brick") brickGame();
+    if(game==="ttt") ticTacToe();
+    if(game==="rps") rpsGame();
+}
 
-    const container = document.getElementById("gameContainer");
+function backMenu(){
+    stopGame();
+    gameArea.style.display="none";
+    menu.style.display="grid";
+}
 
-    container.innerHTML = "";
+document.addEventListener("keydown",e=>{
+    if(currentGame==="snake") snakeKey=e.key;
+    if(currentGame==="car"){
+        if(e.key==="ArrowLeft") carX-=30;
+        if(e.key==="ArrowRight") carX+=30;
+    }
+    if(currentGame==="space"){
+        if(e.key==="ArrowLeft") shipX-=20;
+        if(e.key==="ArrowRight") shipX+=20;
+        if(e.key===" ") bullets.push({x:shipX+17,y:340});
+    }
+    if(currentGame==="dino" && (e.key===" "||e.key==="ArrowUp")) jumpDino();
+});
 
-    if(gameList.length === 0) {
+/* SNAKE */
 
-        container.innerHTML = "<p>No games found.</p>";
+let snakeKey="ArrowRight";
 
-        return;
+function snakeGame(){
+    title.innerText="🐍 Snake Game";
+    canvasGame.classList.remove("hidden");
+    snakeKey="ArrowRight";
+
+    let snake=[{x:200,y:200},{x:180,y:200},{x:160,y:200}];
+    let food={x:Math.floor(Math.random()*25)*20,y:Math.floor(Math.random()*20)*20};
+    let score=0;
+    let direction="ArrowRight";
+
+    controls.innerHTML="Use ⬅️ ⬆️ ⬇️ ➡️ Arrow Keys";
+    info.innerText="Score: 0";
+
+    function loop(){
+        if(snakeKey==="ArrowUp"&&direction!=="ArrowDown") direction="ArrowUp";
+        if(snakeKey==="ArrowDown"&&direction!=="ArrowUp") direction="ArrowDown";
+        if(snakeKey==="ArrowLeft"&&direction!=="ArrowRight") direction="ArrowLeft";
+        if(snakeKey==="ArrowRight"&&direction!=="ArrowLeft") direction="ArrowRight";
+
+        let head={...snake[0]};
+
+        if(direction==="ArrowUp") head.y-=20;
+        if(direction==="ArrowDown") head.y+=20;
+        if(direction==="ArrowLeft") head.x-=20;
+        if(direction==="ArrowRight") head.x+=20;
+
+        if(head.x<0||head.x>=500||head.y<0||head.y>=400||
+           snake.some(p=>p.x===head.x&&p.y===head.y)){
+            alert("Game Over! Score: "+score);
+            snakeGame();
+            return;
+        }
+
+        snake.unshift(head);
+
+        if(head.x===food.x&&head.y===food.y){
+            score++;
+            food={x:Math.floor(Math.random()*25)*20,y:Math.floor(Math.random()*20)*20};
+        }else snake.pop();
+
+        ctx.fillStyle="#05050b";
+        ctx.fillRect(0,0,500,400);
+
+        ctx.fillStyle="#ef4444";
+        ctx.fillRect(food.x,food.y,20,20);
+
+        ctx.fillStyle="#22c55e";
+        snake.forEach(p=>ctx.fillRect(p.x,p.y,18,18));
+
+        info.innerText="Score: "+score;
+
+        setTimeout(()=>animation=requestAnimationFrame(loop),100);
     }
 
-    gameList.forEach((game, index) => {
-
-        container.innerHTML += `
-
-        <div class="game-card">
-
-            <img src="${game.image}">
-
-            <div class="game-info">
-
-                <h3>${game.title}</h3>
-
-                <p>${game.category}</p>
-
-                <button onclick="showDetails(${index})">
-                    View Details
-                </button>
-
-            </div>
-
-        </div>
-
-        `;
-
-    });
-
+    loop();
 }
 
-function searchGames() {
+/* CAR DODGE */
 
-    const searchValue =
-    document.getElementById("search").value.toLowerCase();
+let carX=220;
 
-    const filteredGames = games.filter(game =>
-        game.title.toLowerCase().includes(searchValue)
-    );
+function carGame(){
+    title.innerText="🚗 Car Dodge";
+    canvasGame.classList.remove("hidden");
 
-    displayGames(filteredGames);
+    carX=220;
+    let enemy={x:Math.floor(Math.random()*8)*55,y:-60};
+    let score=0;
+    let running=true;
 
+    controls.innerHTML="Use ⬅️ ➡️ Arrow Keys";
+    
+    function loop(){
+        if(!running)return;
+
+        carX=Math.max(0,Math.min(450,carX));
+        enemy.y+=6;
+
+        if(enemy.y>400){
+            enemy.y=-60;
+            enemy.x=Math.floor(Math.random()*8)*55;
+            score++;
+        }
+
+        if(carX<enemy.x+50&&carX+50>enemy.x&&350<enemy.y+60&&400>enemy.y){
+            running=false;
+            alert("Crash! Score: "+score);
+            carGame();
+            return;
+        }
+
+        ctx.fillStyle="#222";
+        ctx.fillRect(0,0,500,400);
+
+        ctx.fillStyle="white";
+        for(let y=0;y<400;y+=60) ctx.fillRect(245,y,10,35);
+
+        ctx.fillStyle="#22d3ee";
+        ctx.fillRect(carX,340,50,60);
+
+        ctx.fillStyle="#ef4444";
+        ctx.fillRect(enemy.x,enemy.y,50,60);
+
+        info.innerText="Score: "+score;
+
+        animation=requestAnimationFrame(loop);
+    }
+    loop();
 }
 
-function filterGames(category) {
+/* SPACE SHOOTER */
 
-    if(category === "All") {
+let shipX=230;
+let bullets=[];
 
-        displayGames(games);
+function spaceGame(){
+    title.innerText="👾 Space Shooter";
+    canvasGame.classList.remove("hidden");
 
-    } else {
+    shipX=230;
+    bullets=[];
+    let enemies=[];
+    let score=0;
 
-        const filteredGames = games.filter(game =>
-            game.category === category
-        );
-
-        displayGames(filteredGames);
-
+    for(let i=0;i<5;i++){
+        enemies.push({x:Math.random()*460,y:Math.random()*150});
     }
 
+    controls.innerHTML="⬅️ ➡️ Move | SPACE = Shoot";
+
+    function loop(){
+        ctx.fillStyle="#05050b";
+        ctx.fillRect(0,0,500,400);
+
+        shipX=Math.max(0,Math.min(460,shipX));
+
+        ctx.fillStyle="#22d3ee";
+        ctx.fillRect(shipX,350,40,30);
+
+        bullets.forEach(b=>b.y-=8);
+        bullets=bullets.filter(b=>b.y>0);
+
+        ctx.fillStyle="#facc15";
+        bullets.forEach(b=>ctx.fillRect(b.x,b.y,5,12));
+
+        enemies.forEach(e=>e.y+=1.5);
+
+        enemies.forEach(e=>{
+            if(e.y>400){
+                alert("Game Over! Score: "+score);
+                spaceGame();
+            }
+        });
+
+        enemies=enemies.filter(e=>{
+            let hit=bullets.some(b=>b.x>e.x&&b.x<e.x+35&&b.y>e.y&&b.y<e.y+25);
+            if(hit) score++;
+            return !hit;
+        });
+
+        while(enemies.length<5){
+            enemies.push({x:Math.random()*460,y:-Math.random()*100});
+        }
+
+        ctx.fillStyle="#ef4444";
+        enemies.forEach(e=>ctx.fillRect(e.x,e.y,35,25));
+
+        info.innerText="Score: "+score;
+
+        animation=requestAnimationFrame(loop);
+    }
+    loop();
 }
 
-function showDetails(index) {
+/* DINO RUNNER */
 
-    const game = games[index];
+function dinoGame(){
+    title.innerText="🦖 Dino Runner";
+    canvasGame.classList.remove("hidden");
 
-    document.getElementById("modalImage").src = game.image;
+    let dinoY=320;
+    let velocity=0;
+    let obstacle={x:500,w:25};
+    let score=0;
+    let jumping=false;
 
-    document.getElementById("modalTitle").innerText = game.title;
+    window.jumpDino=function(){
+        if(!jumping){
+            velocity=-14;
+            jumping=true;
+        }
+    };
 
-    document.getElementById("modalDescription").innerText =
-    game.description;
+    controls.innerHTML="SPACE or ⬆️ = Jump";
 
-    document.getElementById("modal").style.display = "flex";
+    function loop(){
+        velocity+=0.8;
+        dinoY+=velocity;
 
+        if(dinoY>=320){
+            dinoY=320;
+            velocity=0;
+            jumping=false;
+        }
+
+        obstacle.x-=6;
+
+        if(obstacle.x<-30){
+            obstacle.x=500;
+            score++;
+        }
+
+        if(obstacle.x<70&&obstacle.x+25>40&&dinoY+50>340){
+            alert("Game Over! Score: "+score);
+            dinoGame();
+            return;
+        }
+
+        ctx.fillStyle="#111";
+        ctx.fillRect(0,0,500,400);
+
+        ctx.fillStyle="#777";
+        ctx.fillRect(0,370,500,5);
+
+        ctx.fillStyle="#22c55e";
+        ctx.fillRect(40,dinoY,40,50);
+
+        ctx.fillStyle="#ef4444";
+        ctx.fillRect(obstacle.x,330,25,40);
+
+        info.innerText="Score: "+score;
+
+        animation=requestAnimationFrame(loop);
+    }
+    loop();
 }
 
-function closeModal() {
+/* TARGET SHOOTER */
 
-    document.getElementById("modal").style.display = "none";
+function targetGame(){
+    title.innerText="🎯 Target Shooter";
+    specialGame.classList.remove("hidden");
 
-}
+    let score=0;
+    let time=30;
 
-window.onclick = function(event) {
+    specialGame.innerHTML=`
+    <div class="gameBox">
+        <h2>Score: <span id="targetScore">0</span></h2>
+        <h3>Time: <span id="targetTime">30</span>s</h3>
+        <div id="targetArea" style="height:350px;position:relative;background:#05050b;border-radius:10px;margin-top:15px"></div>
+    </div>`;
 
-    const modal = document.getElementById("modal");
+    const area=document.getElementById("targetArea");
 
-    if(event.target === modal) {
+    function spawn(){
+        if(time<=0)return;
 
-        modal.style.display = "none";
+        const target=document.createElement("button");
+        target.innerText="🎯";
+        target.style.position="absolute";
+        target.style.fontSize="30px";
+        target.style.background="none";
+        target.style.left=Math.random()*(area.clientWidth-60)+"px";
+        target.style.top=Math.random()*(area.clientHeight-60)+"px";
 
+        target.onclick=()=>{
+            score++;
+            document.getElementById("targetScore").innerText=score;
+            target.remove();
+            spawn();
+        };
+
+        area.innerHTML="";
+        area.appendChild(target);
     }
 
+    spawn();
+
+    const timer=setInterval(()=>{
+        time--;
+        const el=document.getElementById("targetTime");
+        if(el)el.innerText=time;
+
+        if(time<=0){
+            clearInterval(timer);
+            alert("Time's Up! Score: "+score);
+        }
+    },1000);
 }
 
-displayGames(games);
+/* BRICK BREAKER */
+
+function brickGame(){
+    title.innerText="🧱 Brick Breaker";
+    canvasGame.classList.remove("hidden");
+
+    let paddleX=200;
+    let ball={x:250,y:300,dx:4,dy:-4};
+    let bricks=[];
+
+    for(let r=0;r<4;r++){
+        for(let c=0;c<8;c++){
+            bricks.push({x:c*60+10,y:r*30+30,alive:true});
+        }
+    }
+
+    controls.innerHTML="Move mouse or touch screen to control paddle";
+
+    canvas.onmousemove=e=>{
+        const rect=canvas.getBoundingClientRect();
+        paddleX=(e.clientX-rect.left)*(500/rect.width)-50;
+    };
+
+    function loop(){
+
+        ball.x+=ball.dx;
+        ball.y+=ball.dy;
+
+        if(ball.x<5||ball.x>495)ball.dx*=-1;
+        if(ball.y<5)ball.dy*=-1;
+
+        if(ball.y>400){
+            alert("Game Over!");
+            brickGame();
+            return;
+        }
+
+        if(ball.y>350&&ball.x>paddleX&&ball.x<paddleX+100){
+            ball.dy*=-1;
+        }
+
+        bricks.forEach(b=>{
+            if(b.alive&&ball.x>b.x&&ball.x<b.x+55&&ball.y>b.y&&ball.y<b.y+20){
+                b.alive=false;
+                ball.dy*=-1;
+            }
+        });
+
+        ctx.fillStyle="#05050b";
+        ctx.fillRect(0,0,500,400);
+
+        ctx.fillStyle="#a855f7";
+        bricks.forEach(b=>{
+            if(b.alive)ctx.fillRect(b.x,b.y,55,20);
+        });
+
+        ctx.fillStyle="#22d3ee";
+        ctx.fillRect(paddleX,370,100,12);
+
+        ctx.beginPath();
+        ctx.arc(ball.x,ball.y,8,0,Math.PI*2);
+        ctx.fillStyle="white";
+        ctx.fill();
+
+        let remaining=bricks.filter(b=>b.alive).length;
+
+        info.innerText="Bricks Remaining: "+remaining;
+
+        if(remaining===0){
+            alert("YOU WIN! 🎉");
+            brickGame();
+            return;
+        }
+
+        animation=requestAnimationFrame(loop);
+    }
+
+    loop();
+}
+
+/* TIC TAC TOE */
+
+function ticTacToe(){
+    title.innerText="❌⭕ Tic Tac Toe";
+    specialGame.classList.remove("hidden");
+
+    let board=["","","","","","","","",""];
+    let player="X";
+    let winner=null;
+
+    specialGame.innerHTML=`
+    <div class="gameBox">
+        <h2 id="tttStatus">Player X's Turn</h2>
+        <div id="tttBoard"></div>
+        <button onclick="ticTacToe()">Restart</button>
+    </div>`;
+
+    const boardDiv=document.getElementById("tttBoard");
+
+    function check(){
+        const wins=[
+            [0,1,2],[3,4,5],[6,7,8],
+            [0,3,6],[1,4,7],[2,5,8],
+            [0,4,8],[2,4,6]
+        ];
+
+        for(let w of wins){
+            if(board[w[0]]&&board[w[0]]===board[w[1]]&&board[w[0]]===board[w[2]]){
+                return board[w[0]];
+            }
+        }
+
+        return board.every(x=>x)?"Draw":null;
+    }
+
+    function render(){
+        boardDiv.innerHTML="";
+
+        board.forEach((value,index)=>{
+            const cell=document.createElement("div");
+            cell.className="cell";
+            cell.innerText=value;
+
+            cell.onclick=()=>{
+                if(board[index]||winner)return;
+
+                board[index]=player;
+                winner=check();
+
+                if(winner){
+                    document.getElementById("tttStatus").innerText=
+                    winner==="Draw"?"It's a Draw!":winner+" Wins! 🎉";
+                }else{
+                    player=player==="X"?"O":"X";
+                    document.getElementById("tttStatus").innerText=
+                    "Player "+player+"'s Turn";
+                }
+
+                render();
+            };
+
+            boardDiv.appendChild(cell);
+        });
+    }
+
+    render();
+}
+
+/* ROCK PAPER SCISSORS */
+
+function rpsGame(){
+    title.innerText="✊ Rock Paper Scissors";
+    specialGame.classList.remove("hidden");
+
+    specialGame.innerHTML=`
+    <div class="gameBox">
+        <h2>Choose Your Move</h2>
+        <button onclick="playRPS('Rock')">🪨 Rock</button>
+        <button onclick="playRPS('Paper')">📄 Paper</button>
+        <button onclick="playRPS('Scissors')">✂️ Scissors</button>
+        <div id="rpsResult"></div>
+        <h3 id="rpsScore">You: 0 | Computer: 0</h3>
+    </div>`;
+
+    window.playerScore=0;
+    window.computerScore=0;
+
+    window.playRPS=function(player){
+        const choices=["Rock","Paper","Scissors"];
+        const computer=choices[Math.floor(Math.random()*3)];
+
+        let result="Draw!";
+
+        if(
+            (player==="Rock"&&computer==="Scissors")||
+            (player==="Paper"&&computer==="Rock")||
+            (player==="Scissors"&&computer==="Paper")
+        ){
+            result="YOU WIN! 🎉";
+            playerScore++;
+        }else if(player!==computer){
+            result="COMPUTER WINS! 🤖";
+            computerScore++;
+        }
+
+        document.getElementById("rpsResult").innerHTML=
+        `You: <b>${player}</b><br>Computer: <b>${computer}</b><br><br>${result}`;
+
+        document.getElementById("rpsScore").innerText=
+        "You: "+playerScore+" | Computer: "+computerScore;
+    };
+}
 
 </script>
 
