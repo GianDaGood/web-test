@@ -1,660 +1,1187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GAMEVERSE ARCADE</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming 1</title>
 
-<style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
-body{background:#080812;color:#fff;text-align:center}
-header{padding:25px;background:linear-gradient(90deg,#7c3aed,#06b6d4)}
-h1{font-size:clamp(28px,6vw,55px)}
-header p{margin-top:8px;color:#eee}
-.games{max-width:1200px;margin:auto;padding:25px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
-.card{background:#151525;border:1px solid #30304a;border-radius:15px;padding:20px;cursor:pointer;transition:.25s}
-.card:hover{transform:translateY(-5px);border-color:#a855f7}
-.card h2{margin-bottom:10px}.card p{color:#aaa;margin-bottom:15px}
-button{border:0;border-radius:8px;padding:10px 16px;background:#a855f7;color:white;font-weight:bold;cursor:pointer;margin:5px}
-button:hover{filter:brightness(1.15)}
-#gameArea{display:none;padding:20px;max-width:900px;margin:auto}
-#gameTitle{font-size:30px;margin:15px}
-canvas{background:#05050b;border:3px solid #a855f7;border-radius:10px;max-width:100%;touch-action:none}
-.info{margin:10px;color:#bbb}
-.back{background:#ef4444}
-.controls{margin:15px}
-.gameBox{background:#121220;padding:20px;border-radius:15px;margin:auto;max-width:600px}
-.hidden{display:none}
-#tttBoard{display:grid;grid-template-columns:repeat(3,100px);gap:8px;justify-content:center;margin:20px auto}
-.cell{width:100px;height:100px;background:#222238;border-radius:10px;font-size:45px;display:flex;align-items:center;justify-content:center;cursor:pointer}
-#rpsResult{font-size:24px;margin:15px}
-@media(max-width:500px){#tttBoard{grid-template-columns:repeat(3,80px)}.cell{width:80px;height:80px}}
-</style>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: white;
+        }
+
+        header {
+            padding: 25px 20px;
+            text-align: center;
+            background: #111827;
+            border-bottom: 1px solid #334155;
+        }
+
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #94a3b8;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: auto;
+            padding: 30px 20px;
+        }
+
+        /* HOME / TOPIC SELECTION */
+
+        .welcome {
+            text-align: center;
+            padding: 45px 20px;
+        }
+
+        .welcome h2 {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .welcome p {
+            color: #cbd5e1;
+            margin-bottom: 10px;
+        }
+
+        .topics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .topic {
+            display: block;
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 25px;
+            text-decoration: none;
+            color: white;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .topic:hover {
+            transform: translateY(-3px);
+            border-color: #64748b;
+        }
+
+        .topic h3 {
+            margin-bottom: 8px;
+        }
+
+        .topic p {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        /* LESSON */
+
+        .lesson {
+            display: none;
+            background: #111827;
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        .lesson h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .lesson h3 {
+            margin-top: 30px;
+            margin-bottom: 12px;
+        }
+
+        .lesson p {
+            color: #cbd5e1;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .lesson ul {
+            margin-left: 25px;
+            color: #cbd5e1;
+            line-height: 1.8;
+        }
+
+        .lesson-number {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        pre {
+            background: #020617;
+            border: 1px solid #334155;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        code {
+            font-family: Consolas, monospace;
+            color: #e2e8f0;
+        }
+
+        .explanation {
+            background: #1e293b;
+            border-left: 4px solid #64748b;
+            padding: 18px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .explanation p {
+            margin-bottom: 12px;
+        }
+
+        /* PREVIOUS / NEXT */
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-top: 35px;
+        }
+
+        .button {
+            border: none;
+            background: #334155;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .button:hover {
+            background: #475569;
+        }
+
+        /* FLOATING HOME BUTTON */
+
+        .home-bottom {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+        }
+
+        .home-button {
+            border: none;
+            background: #334155;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .home-button:hover {
+            background: #475569;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #64748b;
+        }
+
+        @media (max-width: 600px) {
+
+            .welcome h2 {
+                font-size: 30px;
+            }
+
+            .lesson {
+                padding: 22px;
+            }
+
+            .lesson h2 {
+                font-size: 26px;
+            }
+
+            .navigation {
+                flex-direction: column;
+            }
+
+            .navigation .button {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
 <header>
-<h1>🎮 GAMEVERSE ARCADE</h1>
-<p>8 Playable Mini Games • Choose a game and start playing!</p>
+    <h1>Programming 1</h1>
+    <p>My Test Website</p>
 </header>
 
-<section class="games" id="menu">
+<div class="container">
 
-<div class="card" onclick="openGame('snake')">
-<h2>🐍 Snake</h2>
-<p>Eat food and grow as long as possible.</p>
-<button>PLAY NOW</button>
+    <!-- ================= HOME ================= -->
+
+    <section id="home">
+
+        <section class="welcome">
+            <h2>Welcome! 👋</h2>
+
+            <p>
+                Learn programming through lessons, examples, and activities.
+            </p>
+
+            <p>
+                Choose a topic na mababagsak kayo.
+            </p>
+        </section>
+
+        <section class="topics">
+
+            <div class="topic" onclick="openLesson('topic05')">
+                <h3>📚 Topic 05</h3>
+                <p>Python String Formatting</p>
+            </div>
+
+            <div class="topic" onclick="openLesson('topic06')">
+                <h3>📝 Topic 06</h3>
+                <p>String Access & Slicing</p>
+            </div>
+
+            <div class="topic" onclick="openLesson('topic07')">
+                <h3>🔢 Topic 07</h3>
+                <p>Arithmetic Operators</p>
+            </div>
+
+            <div class="topic" onclick="openLesson('topic08')">
+                <h3>➗ Topic 08</h3>
+                <p>Assignment Operators</p>
+            </div>
+
+            <div class="topic" onclick="openLesson('topic09')">
+                <h3>⚖️ Topic 09</h3>
+                <p>Conditional Operators</p>
+            </div>
+
+            <div class="topic" onclick="openLesson('topic10')">
+                <h3>🧠 Topic 10</h3>
+                <p>Logical Operators</p>
+            </div>
+
+        </section>
+
+    </section>
+
+
+    <!-- ================= TOPIC 05 ================= -->
+
+    <section id="topic05" class="lesson">
+
+        <div class="lesson-number">TOPIC 05</div>
+
+        <h2>Python String Formatting</h2>
+
+        <p>
+            String formatting is used when we want to combine text
+            with information stored inside variables.
+        </p>
+
+        <p>
+            For example, if we have a student's name and age,
+            we can put those values directly into a sentence.
+        </p>
+
+        <h3>🎯 What will you learn?</h3>
+
+        <ul>
+            <li>What string formatting means</li>
+            <li>How f-strings work</li>
+            <li>How to put variables inside text</li>
+            <li>How to create clean program output</li>
+        </ul>
+
+        <h3>💻 Example</h3>
+
+        <pre><code>name = "Gian"
+age = 20
+
+print(f"My name is {name}.")
+print(f"I am {age} years old.")</code></pre>
+
+        <h3>🔍 Explanation</h3>
+
+        <div class="explanation">
+
+            <p>
+                <strong>name = "Gian"</strong> creates a variable
+                called <strong>name</strong> and stores "Gian".
+            </p>
+
+            <p>
+                <strong>age = 20</strong> creates a variable called
+                <strong>age</strong> and stores the number 20.
+            </p>
+
+            <p>
+                The letter <strong>f</strong> before the quotation marks
+                means that we are using an <strong>f-string</strong>.
+            </p>
+
+            <p>
+                An f-string allows us to place variables inside
+                curly brackets, such as <strong>{name}</strong>.
+            </p>
+
+            <p>
+                Python replaces the curly brackets with the actual
+                value stored in the variable.
+            </p>
+
+        </div>
+
+        <h3>📌 Output</h3>
+
+        <pre><code>My name is Gian.
+I am 20 years old.</code></pre>
+
+        <h3>🧠 Simple way to understand it</h3>
+
+        <div class="explanation">
+
+            <p>
+                Think of an f-string as a sentence with a blank space.
+            </p>
+
+            <p>
+                "My name is ______."
+            </p>
+
+            <p>
+                If the variable contains "Gian", Python puts
+                "Gian" into that blank.
+            </p>
+
+            <p>
+                So the final sentence becomes:
+                <strong>My name is Gian.</strong>
+            </p>
+
+        </div>
+
+        <div class="navigation">
+            <div></div>
+
+            <button class="button" onclick="openLesson('topic06')">
+                Next Topic →
+            </button>
+        </div>
+
+        <div class="home-bottom">
+            <button class="home-button" onclick="showHome()">🏠</button>
+        </div>
+
+    </section>
+
+
+    <!-- ================= TOPIC 06 ================= -->
+
+    <section id="topic06" class="lesson">
+
+        <div class="lesson-number">TOPIC 06</div>
+
+        <h2>String Access & Slicing</h2>
+
+        <p>
+            A string is a collection of characters. Characters can
+            be letters, numbers, spaces, or symbols.
+        </p>
+
+        <p>
+            Python allows us to access individual characters
+            using their index.
+        </p>
+
+        <h3>🎯 What will you learn?</h3>
+
+        <ul>
+            <li>What an index is</li>
+            <li>How Python counts characters</li>
+            <li>How to access a specific character</li>
+            <li>How negative indexes work</li>
+            <li>How string slicing works</li>
+        </ul>
+
+        <h3>💻 Example</h3>
+
+        <pre><code>word = "PYTHON"
+
+print(word[0])
+print(word[1])
+print(word[-1])</code></pre>
+
+        <h3>🔍 Understanding Indexes</h3>
+
+        <div class="explanation">
+
+            <p>
+                Python starts counting at <strong>0</strong>,
+                not 1.
+            </p>
+
+            <p>
+                For the word <strong>PYTHON</strong>:
+            </p>
+
+            <p>
+                P → index 0<br>
+                Y → index 1<br>
+                T → index 2<br>
+                H → index 3<br>
+                O → index 4<br>
+                N → index 5
+            </p>
+
+        </div>
+
+        <h3>📌 Accessing a Character</h3>
+
+        <pre><code>word = "PYTHON"
+
+print(word[0])</code></pre>
+
+        <p>
+            The output is:
+        </p>
+
+        <pre><code>P</code></pre>
+
+        <p>
+            This happens because P is located at index 0.
+        </p>
+
+        <h3>🔄 Negative Index</h3>
+
+        <pre><code>word = "PYTHON"
+
+print(word[-1])</code></pre>
+
+        <p>
+            The output is:
+        </p>
+
+        <pre><code>N</code></pre>
+
+        <div class="explanation">
+
+            <p>
+                Negative indexes allow us to count from the end
+                of a string.
+            </p>
+
+            <p>
+                <strong>-1</strong> means the last character.
+            </p>
+
+            <p>
+                Therefore, <strong>word[-1]</strong> gives us
+                <strong>N</strong>.
+            </p>
+
+        </div>
+
+        <h3>✂️ String Slicing</h3>
+
+        <p>
+            Slicing means getting only a part of a string.
+        </p>
+
+        <pre><code>word = "PYTHON"
+
+print(word[0:2])</code></pre>
+
+        <p>
+            The output is:
+        </p>
+
+        <pre><code>PY</code></pre>
+
+        <div class="explanation">
+
+            <p>
+                The first number is the starting index.
+            </p>
+
+            <p>
+                The second number is where Python stops.
+            </p>
+
+            <p>
+                The starting index is included, but the ending
+                index is not included.
+            </p>
+
+            <p>
+                Therefore, <strong>word[0:2]</strong> gets index
+                0 and index 1, giving us <strong>PY</strong>.
+            </p>
+
+        </div>
+
+        <div class="navigation">
+
+            <button class="button" onclick="openLesson('topic05')">
+                ← Previous
+            </button>
+
+            <button class="button" onclick="openLesson('topic07')">
+                Next Topic →
+            </button>
+
+        </div>
+
+        <div class="home-bottom">
+            <button class="home-button" onclick="showHome()">🏠</button>
+        </div>
+
+    </section>
+
+
+    <!-- ================= TOPIC 07 ================= -->
+
+    <section id="topic07" class="lesson">
+
+        <div class="lesson-number">TOPIC 07</div>
+
+        <h2>Arithmetic Operators</h2>
+
+        <p>
+            Arithmetic operators are symbols used by Python
+            to perform mathematical calculations.
+        </p>
+
+        <p>
+            They allow our programs to add, subtract, multiply,
+            divide, and perform other mathematical operations.
+        </p>
+
+        <h3>🎯 What will you learn?</h3>
+
+        <ul>
+            <li>Addition</li>
+            <li>Subtraction</li>
+            <li>Multiplication</li>
+            <li>Division</li>
+            <li>Floor division</li>
+            <li>Remainder</li>
+            <li>Exponent</li>
+        </ul>
+
+        <h3>📚 Arithmetic Operators</h3>
+
+        <pre><code>+    Addition
+-    Subtraction
+*    Multiplication
+/    Division
+//   Floor Division
+%    Remainder
+**   Exponent</code></pre>
+
+        <h3>💻 Example</h3>
+
+        <pre><code>a = 10
+b = 3
+
+print(a + b)
+print(a - b)
+print(a * b)
+print(a / b)
+print(a % b)</code></pre>
+
+        <h3>🔍 Explanation</h3>
+
+        <div class="explanation">
+
+            <p>
+                <strong>a = 10</strong> means that the variable
+                a contains the number 10.
+            </p>
+
+            <p>
+                <strong>b = 3</strong> means that the variable
+                b contains the number 3.
+            </p>
+
+            <p>
+                When we write <strong>a + b</strong>, Python
+                adds 10 and 3, resulting in 13.
+            </p>
+
+        </div>
+
+        <h3>➕ Addition</h3>
+
+        <pre><code>10 + 3</code></pre>
+
+        <p>
+            Result:
+        </p>
+
+        <pre><code>13</code></pre>
+
+        <p>
+            The <strong>+</strong> operator is used to add numbers.
+        </p>
+
+        <h3>➖ Subtraction</h3>
+
+        <pre><code>10 - 3</code></pre>
+
+        <p>
+            Result:
+        </p>
+
+        <pre><code>7</code></pre>
+
+        <p>
+            The <strong>-</strong> operator subtracts the second
+            number from the first.
+        </p>
+
+        <h3>✖️ Multiplication</h3>
+
+        <pre><code>10 * 3</code></pre>
+
+        <p>
+            Result:
+        </p>
+
+        <pre><code>30</code></pre>
+
+        <p>
+            The <strong>*</strong> operator multiplies numbers.
+        </p>
+
+        <h3>➗ Division</h3>
+
+        <pre><code>10 / 3</code></pre>
+
+        <p>
+            Result:
+        </p>
+
+        <pre><code>3.3333333333333335</code></pre>
+
+        <p>
+            The <strong>/</strong> operator performs normal division.
+        </p>
+
+        <h3>🧮 Remainder</h3>
+
+        <pre><code>10 % 3</code></pre>
+
+        <p>
+            Result:
+        </p>
+
+        <pre><code>1</code></pre>
+
+        <div class="explanation">
+
+            <p>
+                The <strong>%</strong> operator gives the remainder
+                after division.
+            </p>
+
+            <p>
+                10 divided by 3 gives 3 with a remainder of 1.
+            </p>
+
+            <p>
+                Therefore:
+                <strong>10 % 3 = 1</strong>
+            </p>
+
+        </div>
+
+        <h3>🧠 Easy way to remember</h3>
+
+        <div class="explanation">
+
+            <p><strong>+</strong> → Add</p>
+            <p><strong>-</strong> → Subtract</p>
+            <p><strong>*</strong> → Multiply</p>
+            <p><strong>/</strong> → Divide</p>
+            <p><strong>%</strong> → Remainder</p>
+            <p><strong>//</strong> → Floor division</p>
+            <p><strong>**</strong> → Power / exponent</p>
+
+        </div>
+
+        <div class="navigation">
+
+            <button class="button" onclick="openLesson('topic06')">
+                ← Previous
+            </button>
+
+            <button class="button" onclick="openLesson('topic08')">
+                Next Topic →
+            </button>
+
+        </div>
+
+        <div class="home-bottom">
+            <button class="home-button" onclick="showHome()">🏠</button>
+        </div>
+
+    </section>
+
+
+    <!-- ================= TOPIC 08 ================= -->
+
+    <section id="topic08" class="lesson">
+
+        <div class="lesson-number">TOPIC 08</div>
+
+        <h2>Assignment Operators</h2>
+
+        <p>
+            Assignment operators are used to give a value to a
+            variable or update the value that a variable already has.
+        </p>
+
+        <h3>💻 Basic Assignment</h3>
+
+        <pre><code>x = 10
+
+print(x)</code></pre>
+
+        <p>
+            The <strong>=</strong> operator assigns the value 10
+            to the variable x.
+        </p>
+
+        <h3>📚 Common Assignment Operators</h3>
+
+        <pre><code>=
++=
+-=
+*=
+/=
+%=
+**=</code></pre>
+
+        <h3>💻 Example</h3>
+
+        <pre><code>x = 10
+
+x += 5
+
+print(x)</code></pre>
+
+        <div class="explanation">
+
+            <p>
+                <strong>x = 10</strong> gives x the value 10.
+            </p>
+
+            <p>
+                <strong>x += 5</strong> means add 5 to the current
+                value of x.
+            </p>
+
+            <p>
+                Therefore, x becomes 15.
+            </p>
+
+        </div>
+
+        <h3>🧠 Easy way to remember</h3>
+
+        <div class="explanation">
+
+            <p>
+                Assignment operators are mainly used when we want
+                to <strong>update a variable</strong>.
+            </p>
+
+            <p>
+                For example:
+                <strong>x += 2</strong> means "add 2 to x."
+            </p>
+
+        </div>
+
+        <div class="navigation">
+
+            <button class="button" onclick="openLesson('topic07')">
+                ← Previous
+            </button>
+
+            <button class="button" onclick="openLesson('topic09')">
+                Next Topic →
+            </button>
+
+        </div>
+
+        <div class="home-bottom">
+            <button class="home-button" onclick="showHome()">🏠</button>
+        </div>
+
+    </section>
+
+
+    <!-- ================= TOPIC 09 ================= -->
+
+    <section id="topic09" class="lesson">
+
+        <div class="lesson-number">TOPIC 09</div>
+
+        <h2>Conditional Operators</h2>
+
+        <p>
+            Conditional operators are used to compare values.
+            The result of a comparison is usually either
+            <strong>True</strong> or <strong>False</strong>.
+        </p>
+
+        <h3>📚 Comparison Operators</h3>
+
+        <pre><code>==   Equal to
+!=   Not equal to
+>    Greater than
+<    Less than
+>=   Greater than or equal to
+<=   Less than or equal to</code></pre>
+
+        <h3>💻 Example</h3>
+
+        <pre><code>age = 20
+
+print(age >= 18)</code></pre>
+
+        <p>
+            Output:
+        </p>
+
+        <pre><code>True</code></pre>
+
+        <div class="explanation">
+
+            <p>
+                The expression <strong>age >= 18</strong> asks:
+            </p>
+
+            <p>
+                "Is age greater than or equal to 18?"
+            </p>
+
+            <p>
+                Since age is 20, the answer is
+                <strong>True</strong>.
+            </p>
+
+        </div>
+
+        <h3>🔍 Another Example</h3>
+
+        <pre><code>number = 10
+
+print(number == 5)
+print(number != 5)</code></pre>
+
+        <p>
+            Output:
+        </p>
+
+        <pre><code>False
+True</code></pre>
+
+        <div class="explanation">
+
+            <p>
+                10 is not equal to 5, so
+                <strong>number == 5</strong> is False.
+            </p>
+
+            <p>
+                Because 10 is different from 5,
+                <strong>number != 5</strong> is True.
+            </p>
+
+        </div>
+
+        <h3>🧠 Easy way to understand</h3>
+
+        <div class="explanation">
+
+            <p>
+                Comparison operators are like asking Python a question.
+            </p>
+
+            <p>
+                Example:
+                <strong>10 &gt; 5</strong>
+            </p>
+
+            <p>
+                Python answers:
+                <strong>True</strong>
+            </p>
+
+        </div>
+
+        <div class="navigation">
+
+            <button class="button" onclick="openLesson('topic08')">
+                ← Previous
+            </button>
+
+            <button class="button" onclick="openLesson('topic10')">
+                Next Topic →
+            </button>
+
+        </div>
+
+        <div class="home-bottom">
+            <button class="home-button" onclick="showHome()">🏠</button>
+        </div>
+
+    </section>
+
+
+    <!-- ================= TOPIC 10 ================= -->
+
+    <section id="topic10" class="lesson">
+
+        <div class="lesson-number">TOPIC 10</div>
+
+        <h2>Logical Operators</h2>
+
+        <p>
+            Logical operators are used to combine or modify
+            conditions. They are commonly used when a program
+            needs to check more than one condition.
+        </p>
+
+        <h3>📚 Three Main Logical Operators</h3>
+
+        <pre><code>and
+or
+not</code></pre>
+
+        <h3>🔗 AND</h3>
+
+        <p>
+            The <strong>and</strong> operator is True only when
+            both conditions are True.
+        </p>
+
+        <pre><code>age = 20
+
+print(age >= 18 and age <= 30)</code></pre>
+
+        <p>
+            Output:
+        </p>
+
+        <pre><code>True</code></pre>
+
+        <div class="explanation">
+
+            <p>
+                First condition:
+                <strong>age >= 18</strong> → True
+            </p>
+
+            <p>
+                Second condition:
+                <strong>age <= 30</strong> → True
+            </p>
+
+            <p>
+                Since both conditions are True,
+                the result of <strong>and</strong> is True.
+            </p>
+
+        </div>
+
+        <h3>🔀 OR</h3>
+
+        <p>
+            The <strong>or</strong> operator is True when at least
+            one of the conditions is True.
+        </p>
+
+        <pre><code>number = 5
+
+print(number == 5 or number == 10)</code></pre>
+
+        <p>
+            Output:
+        </p>
+
+        <pre><code>True</code></pre>
+
+        <div class="explanation">
+
+            <p>
+                The first condition is True because number is 5.
+            </p>
+
+            <p>
+                The second condition is False because number is
+                not 10.
+            </p>
+
+            <p>
+                Since at least one condition is True,
+                the result is True.
+            </p>
+
+        </div>
+
+        <h3>🚫 NOT</h3>
+
+        <p>
+            The <strong>not</strong> operator reverses a Boolean value.
+        </p>
+
+        <pre><code>is_student = True
+
+print(not is_student)</code></pre>
+
+        <p>
+            Output:
+        </p>
+
+        <pre><code>False</code></pre>
+
+        <div class="explanation">
+
+            <p>
+                The original value is True.
+            </p>
+
+            <p>
+                Using <strong>not</strong> changes True into False.
+            </p>
+
+            <p>
+                In simple words, <strong>not</strong> means
+                "the opposite."
+            </p>
+
+        </div>
+
+        <h3>🧠 Easy way to remember</h3>
+
+        <div class="explanation">
+
+            <p>
+                <strong>and</strong> → both conditions must be True
+            </p>
+
+            <p>
+                <strong>or</strong> → at least one condition must be True
+            </p>
+
+            <p>
+                <strong>not</strong> → reverses True and False
+            </p>
+
+        </div>
+
+        <div class="navigation">
+
+            <button class="button" onclick="openLesson('topic09')">
+                ← Previous
+            </button>
+
+            <div></div>
+
+        </div>
+
+        <div class="home-bottom">
+            <button class="home-button" onclick="showHome()">🏠</button>
+        </div>
+
+    </section>
+
 </div>
 
-<div class="card" onclick="openGame('car')">
-<h2>🚗 Car Dodge</h2>
-<p>Avoid the incoming cars.</p>
-<button>PLAY NOW</button>
-</div>
 
-<div class="card" onclick="openGame('space')">
-<h2>👾 Space Shooter</h2>
-<p>Shoot enemies and get points.</p>
-<button>PLAY NOW</button>
-</div>
+<footer>
+    <p>© 2026 Programming 1</p>
+</footer>
 
-<div class="card" onclick="openGame('dino')">
-<h2>🦖 Dino Runner</h2>
-<p>Jump over obstacles.</p>
-<button>PLAY NOW</button>
-</div>
-
-<div class="card" onclick="openGame('target')">
-<h2>🎯 Target Shooter</h2>
-<p>Click the target before time runs out.</p>
-<button>PLAY NOW</button>
-</div>
-
-<div class="card" onclick="openGame('brick')">
-<h2>🧱 Brick Breaker</h2>
-<p>Break all the bricks!</p>
-<button>PLAY NOW</button>
-</div>
-
-<div class="card" onclick="openGame('ttt')">
-<h2>❌ Tic Tac Toe</h2>
-<p>Play against a friend.</p>
-<button>PLAY NOW</button>
-</div>
-
-<div class="card" onclick="openGame('rps')">
-<h2>✊ Rock Paper Scissors</h2>
-<p>Beat the computer.</p>
-<button>PLAY NOW</button>
-</div>
-
-</section>
-
-<section id="gameArea">
-
-<button class="back" onclick="backMenu()">⬅ BACK TO MENU</button>
-
-<h2 id="gameTitle"></h2>
-
-<div id="canvasGame" class="hidden">
-<canvas id="canvas" width="500" height="400"></canvas>
-<div class="info" id="gameInfo"></div>
-<div class="controls" id="controls"></div>
-</div>
-
-<div id="specialGame" class="hidden"></div>
-
-</section>
 
 <script>
 
-const menu=document.getElementById("menu");
-const gameArea=document.getElementById("gameArea");
-const title=document.getElementById("gameTitle");
-const canvas=document.getElementById("canvas");
-const ctx=canvas.getContext("2d");
-const canvasGame=document.getElementById("canvasGame");
-const specialGame=document.getElementById("specialGame");
-const info=document.getElementById("gameInfo");
-const controls=document.getElementById("controls");
+    function openLesson(topic) {
 
-let animation=null;
-let currentGame="";
+        document.getElementById("home").style.display = "none";
 
-function stopGame(){
-    if(animation) cancelAnimationFrame(animation);
-    animation=null;
-}
+        const lessons = document.querySelectorAll(".lesson");
 
-function openGame(game){
-    stopGame();
-    currentGame=game;
-    menu.style.display="none";
-    gameArea.style.display="block";
-    canvasGame.classList.add("hidden");
-    specialGame.classList.add("hidden");
-    specialGame.innerHTML="";
-    controls.innerHTML="";
-    info.innerHTML="";
-
-    if(game==="snake") snakeGame();
-    if(game==="car") carGame();
-    if(game==="space") spaceGame();
-    if(game==="dino") dinoGame();
-    if(game==="target") targetGame();
-    if(game==="brick") brickGame();
-    if(game==="ttt") ticTacToe();
-    if(game==="rps") rpsGame();
-}
-
-function backMenu(){
-    stopGame();
-    gameArea.style.display="none";
-    menu.style.display="grid";
-}
-
-document.addEventListener("keydown",e=>{
-    if(currentGame==="snake") snakeKey=e.key;
-    if(currentGame==="car"){
-        if(e.key==="ArrowLeft") carX-=30;
-        if(e.key==="ArrowRight") carX+=30;
-    }
-    if(currentGame==="space"){
-        if(e.key==="ArrowLeft") shipX-=20;
-        if(e.key==="ArrowRight") shipX+=20;
-        if(e.key===" ") bullets.push({x:shipX+17,y:340});
-    }
-    if(currentGame==="dino" && (e.key===" "||e.key==="ArrowUp")) jumpDino();
-});
-
-/* SNAKE */
-
-let snakeKey="ArrowRight";
-
-function snakeGame(){
-    title.innerText="🐍 Snake Game";
-    canvasGame.classList.remove("hidden");
-    snakeKey="ArrowRight";
-
-    let snake=[{x:200,y:200},{x:180,y:200},{x:160,y:200}];
-    let food={x:Math.floor(Math.random()*25)*20,y:Math.floor(Math.random()*20)*20};
-    let score=0;
-    let direction="ArrowRight";
-
-    controls.innerHTML="Use ⬅️ ⬆️ ⬇️ ➡️ Arrow Keys";
-    info.innerText="Score: 0";
-
-    function loop(){
-        if(snakeKey==="ArrowUp"&&direction!=="ArrowDown") direction="ArrowUp";
-        if(snakeKey==="ArrowDown"&&direction!=="ArrowUp") direction="ArrowDown";
-        if(snakeKey==="ArrowLeft"&&direction!=="ArrowRight") direction="ArrowLeft";
-        if(snakeKey==="ArrowRight"&&direction!=="ArrowLeft") direction="ArrowRight";
-
-        let head={...snake[0]};
-
-        if(direction==="ArrowUp") head.y-=20;
-        if(direction==="ArrowDown") head.y+=20;
-        if(direction==="ArrowLeft") head.x-=20;
-        if(direction==="ArrowRight") head.x+=20;
-
-        if(head.x<0||head.x>=500||head.y<0||head.y>=400||
-           snake.some(p=>p.x===head.x&&p.y===head.y)){
-            alert("Game Over! Score: "+score);
-            snakeGame();
-            return;
-        }
-
-        snake.unshift(head);
-
-        if(head.x===food.x&&head.y===food.y){
-            score++;
-            food={x:Math.floor(Math.random()*25)*20,y:Math.floor(Math.random()*20)*20};
-        }else snake.pop();
-
-        ctx.fillStyle="#05050b";
-        ctx.fillRect(0,0,500,400);
-
-        ctx.fillStyle="#ef4444";
-        ctx.fillRect(food.x,food.y,20,20);
-
-        ctx.fillStyle="#22c55e";
-        snake.forEach(p=>ctx.fillRect(p.x,p.y,18,18));
-
-        info.innerText="Score: "+score;
-
-        setTimeout(()=>animation=requestAnimationFrame(loop),100);
-    }
-
-    loop();
-}
-
-/* CAR DODGE */
-
-let carX=220;
-
-function carGame(){
-    title.innerText="🚗 Car Dodge";
-    canvasGame.classList.remove("hidden");
-
-    carX=220;
-    let enemy={x:Math.floor(Math.random()*8)*55,y:-60};
-    let score=0;
-    let running=true;
-
-    controls.innerHTML="Use ⬅️ ➡️ Arrow Keys";
-    
-    function loop(){
-        if(!running)return;
-
-        carX=Math.max(0,Math.min(450,carX));
-        enemy.y+=6;
-
-        if(enemy.y>400){
-            enemy.y=-60;
-            enemy.x=Math.floor(Math.random()*8)*55;
-            score++;
-        }
-
-        if(carX<enemy.x+50&&carX+50>enemy.x&&350<enemy.y+60&&400>enemy.y){
-            running=false;
-            alert("Crash! Score: "+score);
-            carGame();
-            return;
-        }
-
-        ctx.fillStyle="#222";
-        ctx.fillRect(0,0,500,400);
-
-        ctx.fillStyle="white";
-        for(let y=0;y<400;y+=60) ctx.fillRect(245,y,10,35);
-
-        ctx.fillStyle="#22d3ee";
-        ctx.fillRect(carX,340,50,60);
-
-        ctx.fillStyle="#ef4444";
-        ctx.fillRect(enemy.x,enemy.y,50,60);
-
-        info.innerText="Score: "+score;
-
-        animation=requestAnimationFrame(loop);
-    }
-    loop();
-}
-
-/* SPACE SHOOTER */
-
-let shipX=230;
-let bullets=[];
-
-function spaceGame(){
-    title.innerText="👾 Space Shooter";
-    canvasGame.classList.remove("hidden");
-
-    shipX=230;
-    bullets=[];
-    let enemies=[];
-    let score=0;
-
-    for(let i=0;i<5;i++){
-        enemies.push({x:Math.random()*460,y:Math.random()*150});
-    }
-
-    controls.innerHTML="⬅️ ➡️ Move | SPACE = Shoot";
-
-    function loop(){
-        ctx.fillStyle="#05050b";
-        ctx.fillRect(0,0,500,400);
-
-        shipX=Math.max(0,Math.min(460,shipX));
-
-        ctx.fillStyle="#22d3ee";
-        ctx.fillRect(shipX,350,40,30);
-
-        bullets.forEach(b=>b.y-=8);
-        bullets=bullets.filter(b=>b.y>0);
-
-        ctx.fillStyle="#facc15";
-        bullets.forEach(b=>ctx.fillRect(b.x,b.y,5,12));
-
-        enemies.forEach(e=>e.y+=1.5);
-
-        enemies.forEach(e=>{
-            if(e.y>400){
-                alert("Game Over! Score: "+score);
-                spaceGame();
-            }
+        lessons.forEach(function(lesson) {
+            lesson.style.display = "none";
         });
 
-        enemies=enemies.filter(e=>{
-            let hit=bullets.some(b=>b.x>e.x&&b.x<e.x+35&&b.y>e.y&&b.y<e.y+25);
-            if(hit) score++;
-            return !hit;
-        });
+        const selectedLesson = document.getElementById(topic);
 
-        while(enemies.length<5){
-            enemies.push({x:Math.random()*460,y:-Math.random()*100});
+        if (selectedLesson) {
+            selectedLesson.style.display = "block";
         }
 
-        ctx.fillStyle="#ef4444";
-        enemies.forEach(e=>ctx.fillRect(e.x,e.y,35,25));
-
-        info.innerText="Score: "+score;
-
-        animation=requestAnimationFrame(loop);
-    }
-    loop();
-}
-
-/* DINO RUNNER */
-
-function dinoGame(){
-    title.innerText="🦖 Dino Runner";
-    canvasGame.classList.remove("hidden");
-
-    let dinoY=320;
-    let velocity=0;
-    let obstacle={x:500,w:25};
-    let score=0;
-    let jumping=false;
-
-    window.jumpDino=function(){
-        if(!jumping){
-            velocity=-14;
-            jumping=true;
-        }
-    };
-
-    controls.innerHTML="SPACE or ⬆️ = Jump";
-
-    function loop(){
-        velocity+=0.8;
-        dinoY+=velocity;
-
-        if(dinoY>=320){
-            dinoY=320;
-            velocity=0;
-            jumping=false;
-        }
-
-        obstacle.x-=6;
-
-        if(obstacle.x<-30){
-            obstacle.x=500;
-            score++;
-        }
-
-        if(obstacle.x<70&&obstacle.x+25>40&&dinoY+50>340){
-            alert("Game Over! Score: "+score);
-            dinoGame();
-            return;
-        }
-
-        ctx.fillStyle="#111";
-        ctx.fillRect(0,0,500,400);
-
-        ctx.fillStyle="#777";
-        ctx.fillRect(0,370,500,5);
-
-        ctx.fillStyle="#22c55e";
-        ctx.fillRect(40,dinoY,40,50);
-
-        ctx.fillStyle="#ef4444";
-        ctx.fillRect(obstacle.x,330,25,40);
-
-        info.innerText="Score: "+score;
-
-        animation=requestAnimationFrame(loop);
-    }
-    loop();
-}
-
-/* TARGET SHOOTER */
-
-function targetGame(){
-    title.innerText="🎯 Target Shooter";
-    specialGame.classList.remove("hidden");
-
-    let score=0;
-    let time=30;
-
-    specialGame.innerHTML=`
-    <div class="gameBox">
-        <h2>Score: <span id="targetScore">0</span></h2>
-        <h3>Time: <span id="targetTime">30</span>s</h3>
-        <div id="targetArea" style="height:350px;position:relative;background:#05050b;border-radius:10px;margin-top:15px"></div>
-    </div>`;
-
-    const area=document.getElementById("targetArea");
-
-    function spawn(){
-        if(time<=0)return;
-
-        const target=document.createElement("button");
-        target.innerText="🎯";
-        target.style.position="absolute";
-        target.style.fontSize="30px";
-        target.style.background="none";
-        target.style.left=Math.random()*(area.clientWidth-60)+"px";
-        target.style.top=Math.random()*(area.clientHeight-60)+"px";
-
-        target.onclick=()=>{
-            score++;
-            document.getElementById("targetScore").innerText=score;
-            target.remove();
-            spawn();
-        };
-
-        area.innerHTML="";
-        area.appendChild(target);
-    }
-
-    spawn();
-
-    const timer=setInterval(()=>{
-        time--;
-        const el=document.getElementById("targetTime");
-        if(el)el.innerText=time;
-
-        if(time<=0){
-            clearInterval(timer);
-            alert("Time's Up! Score: "+score);
-        }
-    },1000);
-}
-
-/* BRICK BREAKER */
-
-function brickGame(){
-    title.innerText="🧱 Brick Breaker";
-    canvasGame.classList.remove("hidden");
-
-    let paddleX=200;
-    let ball={x:250,y:300,dx:4,dy:-4};
-    let bricks=[];
-
-    for(let r=0;r<4;r++){
-        for(let c=0;c<8;c++){
-            bricks.push({x:c*60+10,y:r*30+30,alive:true});
-        }
-    }
-
-    controls.innerHTML="Move mouse or touch screen to control paddle";
-
-    canvas.onmousemove=e=>{
-        const rect=canvas.getBoundingClientRect();
-        paddleX=(e.clientX-rect.left)*(500/rect.width)-50;
-    };
-
-    function loop(){
-
-        ball.x+=ball.dx;
-        ball.y+=ball.dy;
-
-        if(ball.x<5||ball.x>495)ball.dx*=-1;
-        if(ball.y<5)ball.dy*=-1;
-
-        if(ball.y>400){
-            alert("Game Over!");
-            brickGame();
-            return;
-        }
-
-        if(ball.y>350&&ball.x>paddleX&&ball.x<paddleX+100){
-            ball.dy*=-1;
-        }
-
-        bricks.forEach(b=>{
-            if(b.alive&&ball.x>b.x&&ball.x<b.x+55&&ball.y>b.y&&ball.y<b.y+20){
-                b.alive=false;
-                ball.dy*=-1;
-            }
-        });
-
-        ctx.fillStyle="#05050b";
-        ctx.fillRect(0,0,500,400);
-
-        ctx.fillStyle="#a855f7";
-        bricks.forEach(b=>{
-            if(b.alive)ctx.fillRect(b.x,b.y,55,20);
-        });
-
-        ctx.fillStyle="#22d3ee";
-        ctx.fillRect(paddleX,370,100,12);
-
-        ctx.beginPath();
-        ctx.arc(ball.x,ball.y,8,0,Math.PI*2);
-        ctx.fillStyle="white";
-        ctx.fill();
-
-        let remaining=bricks.filter(b=>b.alive).length;
-
-        info.innerText="Bricks Remaining: "+remaining;
-
-        if(remaining===0){
-            alert("YOU WIN! 🎉");
-            brickGame();
-            return;
-        }
-
-        animation=requestAnimationFrame(loop);
-    }
-
-    loop();
-}
-
-/* TIC TAC TOE */
-
-function ticTacToe(){
-    title.innerText="❌⭕ Tic Tac Toe";
-    specialGame.classList.remove("hidden");
-
-    let board=["","","","","","","","",""];
-    let player="X";
-    let winner=null;
-
-    specialGame.innerHTML=`
-    <div class="gameBox">
-        <h2 id="tttStatus">Player X's Turn</h2>
-        <div id="tttBoard"></div>
-        <button onclick="ticTacToe()">Restart</button>
-    </div>`;
-
-    const boardDiv=document.getElementById("tttBoard");
-
-    function check(){
-        const wins=[
-            [0,1,2],[3,4,5],[6,7,8],
-            [0,3,6],[1,4,7],[2,5,8],
-            [0,4,8],[2,4,6]
-        ];
-
-        for(let w of wins){
-            if(board[w[0]]&&board[w[0]]===board[w[1]]&&board[w[0]]===board[w[2]]){
-                return board[w[0]];
-            }
-        }
-
-        return board.every(x=>x)?"Draw":null;
-    }
-
-    function render(){
-        boardDiv.innerHTML="";
-
-        board.forEach((value,index)=>{
-            const cell=document.createElement("div");
-            cell.className="cell";
-            cell.innerText=value;
-
-            cell.onclick=()=>{
-                if(board[index]||winner)return;
-
-                board[index]=player;
-                winner=check();
-
-                if(winner){
-                    document.getElementById("tttStatus").innerText=
-                    winner==="Draw"?"It's a Draw!":winner+" Wins! 🎉";
-                }else{
-                    player=player==="X"?"O":"X";
-                    document.getElementById("tttStatus").innerText=
-                    "Player "+player+"'s Turn";
-                }
-
-                render();
-            };
-
-            boardDiv.appendChild(cell);
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
         });
     }
 
-    render();
-}
 
-/* ROCK PAPER SCISSORS */
+    function showHome() {
 
-function rpsGame(){
-    title.innerText="✊ Rock Paper Scissors";
-    specialGame.classList.remove("hidden");
+        const lessons = document.querySelectorAll(".lesson");
 
-    specialGame.innerHTML=`
-    <div class="gameBox">
-        <h2>Choose Your Move</h2>
-        <button onclick="playRPS('Rock')">🪨 Rock</button>
-        <button onclick="playRPS('Paper')">📄 Paper</button>
-        <button onclick="playRPS('Scissors')">✂️ Scissors</button>
-        <div id="rpsResult"></div>
-        <h3 id="rpsScore">You: 0 | Computer: 0</h3>
-    </div>`;
+        lessons.forEach(function(lesson) {
+            lesson.style.display = "none";
+        });
 
-    window.playerScore=0;
-    window.computerScore=0;
+        document.getElementById("home").style.display = "block";
 
-    window.playRPS=function(player){
-        const choices=["Rock","Paper","Scissors"];
-        const computer=choices[Math.floor(Math.random()*3)];
-
-        let result="Draw!";
-
-        if(
-            (player==="Rock"&&computer==="Scissors")||
-            (player==="Paper"&&computer==="Rock")||
-            (player==="Scissors"&&computer==="Paper")
-        ){
-            result="YOU WIN! 🎉";
-            playerScore++;
-        }else if(player!==computer){
-            result="COMPUTER WINS! 🤖";
-            computerScore++;
-        }
-
-        document.getElementById("rpsResult").innerHTML=
-        `You: <b>${player}</b><br>Computer: <b>${computer}</b><br><br>${result}`;
-
-        document.getElementById("rpsScore").innerText=
-        "You: "+playerScore+" | Computer: "+computerScore;
-    };
-}
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
 
 </script>
 
